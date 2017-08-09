@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../com.github.jmodel.adapter.parent/pom.xml</relativePath>
+		<groupId>com.github.jmodel</groupId>
+		<artifactId>com.github.jmodel.adapter.parent</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
+	<artifactId>com.github.jmodel.adapter.api</artifactId>
+	<packaging>jar</packaging>
+
+	<name>jmodel adapter API</name>
+	<url>http://www.github.com/jmodel/adapter</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+		</dependency>
+
+		
+	</dependencies>
+
+</project>
+
+
+
+
+
+
