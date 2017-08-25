@@ -3,7 +3,6 @@ package com.github.jmodel.adapter.api.persistence;
 import java.util.Iterator;
 import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
-import java.util.function.BiFunction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +36,7 @@ public class CrudFunctionFactoryService {
 		return service;
 	}
 
-	public <T extends BiFunction<?, ?, ?>> T getCrudFunction(String persistenceName) {
+	public <T extends Action<?, ?, ?>> T getCrudFunction(String persistenceName) {
 
 		T crudFunction = null;
 

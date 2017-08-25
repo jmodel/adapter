@@ -1,6 +1,6 @@
 package com.github.jmodel.adapter.spi.persistence;
 
-import java.util.function.BiFunction;
+import com.github.jmodel.adapter.api.persistence.Action;
 
 /**
  * The factory is used to create function for database operation like create,
@@ -11,5 +11,5 @@ import java.util.function.BiFunction;
  */
 public interface CrudFunctionFactory {
 
-	public <T extends BiFunction<?, ?, ?>> T getCrudFunction(String persistenceName);
+	public <T extends Action<?, ?, ?>> T getCrudFunction(String persistenceName);
 }

@@ -24,12 +24,11 @@ public class Persister {
 		return persisterAdapter.insert(session, persistenceName, json, valueType);
 	}
 
-	public static Long insertObject(final String persistenceName, final Object domainModel, final String... args)
-			throws AdapterException {
+	public static <S> Long insertObject(S session, String persistenceName, Object obj) throws AdapterException {
 
 		checkAdapter();
 
-		return null;
+		return persisterAdapter.insertObject(session, persistenceName, obj);
 	}
 
 	public static Long update(final String persistenceName, final Long id, final String json, final String... args)
