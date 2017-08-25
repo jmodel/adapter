@@ -2,22 +2,22 @@ package com.github.jmodel.adapter.persistence.exampleA;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 
-import com.github.jmodel.adapter.persistence.exampleA.action.InsertUser;
+import com.github.jmodel.adapter.persistence.exampleA.dao.InsertUser;
+import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.spi.persistence.CrudFunctionFactory;
 
 public class ExampleCrudFunctionFactoryImpl implements CrudFunctionFactory {
 
-	private Map<String, BiFunction<?, ?, ?>> actionMap = new HashMap<String, BiFunction<?, ?, ?>>();
+	private Map<String, Action<?, ?, ?>> actionMap = new HashMap<String, Action<?, ?, ?>>();
 
 	public ExampleCrudFunctionFactoryImpl() {
-		actionMap.put("xxx", new InsertUser());
+		actionMap.put("insertUser", new InsertUser());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends BiFunction<?, ?, ?>> T getCrudFunction(String persistenceName) {
+	public <T extends Action<?, ?, ?>> T getCrudFunction(String persistenceName) {
 		return (T) actionMap.get(persistenceName);
 	}
 

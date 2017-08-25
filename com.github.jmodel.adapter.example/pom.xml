@@ -28,13 +28,11 @@
 			<version>${project.version}</version>
 		</dependency>
 
-
-
-		<!-- for test -->
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version>
 		</dependency>
 
 	</dependencies>

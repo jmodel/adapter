@@ -1,10 +1,20 @@
-package com.github.jmodel.adapter.persistence.exampleA.domain;
+package com.github.jmodel.adapter.persistence.exampleA.dao.bean;
 
 public class User {
+
+	private Long id;
 
 	private String name;
 
 	private String code;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

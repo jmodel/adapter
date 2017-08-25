@@ -1,9 +1,8 @@
 package com.github.jmodel.adapter.impl.persistence;
 
-import java.util.function.BiFunction;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jmodel.adapter.AdapterException;
+import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.api.persistence.CrudFunctionFactoryService;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
 
@@ -26,8 +25,7 @@ public class PersistenterAdapterImpl implements PersisterAdapter {
 
 		try {
 			T obj = objectMapper.readValue(json, clz);
-			BiFunction<S, T, Long> crudFunction = CrudFunctionFactoryService.getInstance()
-					.getCrudFunction(persistenceName);
+			Action<S, T, Long> crudFunction = CrudFunctionFactoryService.getInstance().getCrudFunction(persistenceName);
 			if (crudFunction == null) {
 
 			}
@@ -40,8 +38,7 @@ public class PersistenterAdapterImpl implements PersisterAdapter {
 	@Override
 	public <S, T> Long insertObject(S session, String persistenceName, T obj) throws AdapterException {
 		try {
-			BiFunction<S, T, Long> crudFunction = CrudFunctionFactoryService.getInstance()
-					.getCrudFunction(persistenceName);
+			Action<S, T, Long> crudFunction = CrudFunctionFactoryService.getInstance().getCrudFunction(persistenceName);
 			return crudFunction.apply(session, obj);
 		} catch (Exception e) {
 			throw new AdapterException("Failed to insert", e);

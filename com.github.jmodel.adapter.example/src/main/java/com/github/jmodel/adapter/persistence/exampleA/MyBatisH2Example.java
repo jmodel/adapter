@@ -1,19 +1,61 @@
 package com.github.jmodel.adapter.persistence.exampleA;
 
-import com.github.jmodel.adapter.AdapterException;
-import com.github.jmodel.adapter.Persister;
-import com.github.jmodel.adapter.persistence.exampleA.domain.User;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class MyBatisMySqlExample {
+import org.apache.ibatis.session.SqlSession;
+
+import com.github.jmodel.adapter.Logger;
+import com.github.jmodel.adapter.Persister;
+import com.github.jmodel.adapter.persistence.exampleA.dao.bean.User;
+
+public class MyBatisH2Example {
+
+	private final static Logger logger = Logger.getLogger(MyBatisH2Example.class.getName());
 
 	public static void main(String[] args) {
-		
+
+		SqlSession session = null;
+
 		try {
-			Persister.insertObject("insert", new User());
-		
-		} catch (AdapterException e) {
-			
+
+			//////////////////////////////////////
+			Connection connection = DriverManager.getConnection("jdbc:h2:mem:db1");
+			Statement s = connection.createStatement();
+			try {
+				s.execute("DROP TABLE T_USER");
+			} catch (SQLException sqle) {
+
+			}
+			s.execute("CREATE TABLE T_USER (ID BIGINT AUTO_INCREMENT, NAME VARCHAR(50), CODE VARCHAR(50))");
+			s.close();
+			/////////////////////////////////////
+
+			session = ConnectionFactory.getSqlSessionFactory().openSession();
+
+			User user = new User();
+			user.setName("jianni");
+			user.setCode("JN");
+			Long userId = Persister.insertObject(session, "insertUser", user);
+
+			logger.info(String.valueOf(userId));
+			session.commit();
+
+			connection.close();
+
+		} catch (Exception e) {
+			session.rollback();
 			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

@@ -1,8 +1,8 @@
-package com.github.jmodel.adapter.persistence.exampleA.mapper;
+package com.github.jmodel.adapter.persistence.exampleA.dao.mapper;
 
-import com.github.jmodel.adapter.persistence.exampleA.domain.User;
+import com.github.jmodel.adapter.persistence.exampleA.dao.bean.User;
 
 public interface UserMapper {
 
-	public void insertUser(User user);
+	public Long insertUser(User user);
 }
