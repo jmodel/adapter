@@ -6,7 +6,7 @@
 		<relativePath>../com.github.jmodel.adapter.parent/pom.xml</relativePath>
 		<groupId>com.github.jmodel</groupId>
 		<artifactId>com.github.jmodel.adapter.parent</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<artifactId>com.github.jmodel.adapter.impl</artifactId>
@@ -16,11 +16,36 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.adapter.api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.mapper.api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>solr-solrj</artifactId>
+			<groupId>org.apache.solr</groupId>
+			<version>5.5.0</version>
+		</dependency>
+
 		<!-- for test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

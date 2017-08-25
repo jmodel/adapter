@@ -9,21 +9,26 @@
 		<version>0.0.2</version>
 	</parent>
 
-	<artifactId>com.github.jmodel.adapter.api</artifactId>
+	<artifactId>com.github.jmodel.adapter.example</artifactId>
 	<packaging>jar</packaging>
 
-	<name>jmodel adapter Api</name>
+	<name>jmodel-adapter Example</name>
 
 	<dependencies>
 
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.adapter.api</artifactId>
+			<version>${project.version}</version>
 		</dependency>
+
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.adapter.impl</artifactId>
+			<version>${project.version}</version>
 		</dependency>
+
+
 
 		<!-- for test -->
 		<dependency>
@@ -31,8 +36,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
 
+	</dependencies>
 </project>
+
+
+
+
 
 

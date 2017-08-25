@@ -5,7 +5,7 @@
 
 	<groupId>com.github.jmodel</groupId>
 	<artifactId>com.github.jmodel.adapter.parent</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 
 	<name>jmodel adapter Parent</name>
@@ -42,6 +42,8 @@
 	</scm>
 
 	<properties>
+		<jmodel.version>0.0.2</jmodel.version>
+		<jmodel.mapper.version>0.0.2</jmodel.mapper.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
 		<jdk.version>1.8</jdk.version>
@@ -102,6 +104,22 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-pool2</artifactId>
 				<version>${org.apache.commons.pool.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.jmodel</groupId>
+				<artifactId>com.github.jmodel.api</artifactId>
+				<version>${jmodel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.jmodel</groupId>
+				<artifactId>com.github.jmodel.mapper.api</artifactId>
+				<version>${jmodel.mapper.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
