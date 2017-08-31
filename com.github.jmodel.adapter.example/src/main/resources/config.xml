@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- <!DOCTYPE configuration PUBLIC "-//www.github.com//jmodel//adapter//DTD 
+	Config 0.0.2//EN" "http://www.github.com/jmodel/adapter/dtd/config.dtd"> -->
+<configuration>
+
+	<region id="Adapter">
+		<item id="LoggerAdapter" value="com.github.jmodel.adapter.impl.xxx" />
+		<item id="MapperAdapter" value="com.github.jmodel.adapter.impl.xxx" />
+	</region>
+	<region id="Service">
+		<item id="Search" value="com.github.jmodel.japp.service.search.SearchService">
+			<item id="SearchUser">
+				<property name="index" value="/myindex/mytype" />
+				<property name="mappingURIForSearch" value="3" />
+				<property name="mappingURIForUI" value="4" />
+			</item>
+		</item>
+	</region>
+	<region id="Feature">
+		<item id="Search" value="com.github.jmodel.japp.feature.search.Solr5SearchF"/>
+	</region>
+
+
+</configuration>

@@ -31,6 +31,20 @@ public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 		logger.log(logRecord);
 	}
 
+	@Override
+	public void warn(String msg) {
+		LogRecord logRecord = new LogRecord(Level.WARNING, msg);
+		inferCaller(logRecord);
+		logger.log(logRecord);
+	}
+
+	@Override
+	public void error(String msg) {
+		LogRecord logRecord = new LogRecord(Level.SEVERE, msg);
+		inferCaller(logRecord);
+		logger.log(logRecord);
+	}
+
 	private void inferCaller(LogRecord logRecord) {
 		JavaLangAccess access = SharedSecrets.getJavaLangAccess();
 		Throwable throwable = new Throwable();
@@ -60,4 +74,5 @@ public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 	private boolean isLoggerImplFrame(String cname) {
 		return cname.equals("com.github.jmodel.adapter.Logger");
 	}
+
 }

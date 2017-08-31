@@ -11,10 +11,9 @@ import org.apache.solr.client.solrj.impl.NoOpResponseParser;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.common.util.NamedList;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.Searcher.Query;
-import com.github.jmodel.adapter.api.AdapterFactoryService;
-import com.github.jmodel.adapter.api.Config;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
 
 /**
@@ -27,6 +26,8 @@ public class Solr5SearcherAdapter implements SearcherAdapter {
 
 	private final Map<String, SolrClient> solrQueryClientMap = new HashMap<String, SolrClient>();
 
+	private final ObjectMapper objectMapper = new ObjectMapper();
+
 	private static String clientType;
 	private static String solrServerUrl;
 	private static String zookeeperUrl;
@@ -34,11 +35,11 @@ public class Solr5SearcherAdapter implements SearcherAdapter {
 	static {
 		try {
 
-			final Config c = AdapterFactoryService.getInstance().getConfig();
+			// final Config c = AdapterFactoryService.getInstance().getConfig();
 
-			clientType = c.getValue("search.solr.client.type");
-			solrServerUrl = c.getValue("search.solr.server.url");
-			zookeeperUrl = c.getValue("search.solr.zoo_keeper.url");
+			clientType = null;// c.getValue("search.solr.client.type");
+			solrServerUrl = null;// c.getValue("search.solr.server.url");
+			zookeeperUrl = null;// c.getValue("search.solr.zoo_keeper.url");
 
 		} catch (Exception e) {
 
@@ -46,10 +47,10 @@ public class Solr5SearcherAdapter implements SearcherAdapter {
 	}
 
 	@Override
-	public String search(String indexName, Query query) throws AdapterException {
+	public String search(String indexName, String qx) throws AdapterException {
 
 		try {
-
+			Query query = objectMapper.readValue(qx, Query.class);
 			final SolrClient solr = getClientForQuery(indexName);
 
 			final String queryString = query.getQuery();
@@ -99,6 +100,12 @@ public class Solr5SearcherAdapter implements SearcherAdapter {
 		}
 
 		return solr;
+	}
+
+	@Override
+	public void index(String indexName, String doc) throws AdapterException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

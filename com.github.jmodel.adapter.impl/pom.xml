@@ -16,6 +16,7 @@
 
 	<dependencies>
 
+		<!-- jmodel series -->
 		<dependency>
 			<groupId>com.github.jmodel</groupId>
 			<artifactId>com.github.jmodel.adapter.api</artifactId>
@@ -30,16 +31,26 @@
 			<artifactId>com.github.jmodel.mapper.api</artifactId>
 		</dependency>
 
+		<!-- third party -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-jcs-jcache</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.4.5</version>
 		</dependency>
-
 		<dependency>
 			<artifactId>solr-solrj</artifactId>
 			<groupId>org.apache.solr</groupId>
-			<version>5.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>sniffer</artifactId>
 		</dependency>
 
 		<!-- for test -->

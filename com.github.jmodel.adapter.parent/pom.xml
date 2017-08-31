@@ -48,9 +48,15 @@
 		<junit.version>4.12</junit.version>
 		<jdk.version>1.8</jdk.version>
 		<jackson.version>2.6.1</jackson.version>
+		<org.mybatis.version>3.4.5</org.mybatis.version>
+		<jaxb.api.version>2.2.11</jaxb.api.version>
+		<sun.jaxb.impl.version>2.2.11</sun.jaxb.impl.version>
+		<org.elasticsearch.version>5.5.2</org.elasticsearch.version>
+		<org.apache.solr.version>5.5.0</org.apache.solr.version>
 		<org.apache.commons.lang3.version>3.4</org.apache.commons.lang3.version>
 		<org.apache.commons.pool.version>2.4.2</org.apache.commons.pool.version>
 		<org.apache.commons.io.version>2.5</org.apache.commons.io.version>
+		<org.apache.commons.jcs.version>2.2</org.apache.commons.jcs.version>
 		<maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
 		<maven.source.plugin.version>3.0.1</maven.source.plugin.version>
 		<maven.javadoc.plugin.version>2.10.4</maven.javadoc.plugin.version>
@@ -80,6 +86,20 @@
 
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- jmodel series -->
+			<dependency>
+				<groupId>com.github.jmodel</groupId>
+				<artifactId>com.github.jmodel.api</artifactId>
+				<version>${jmodel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.jmodel</groupId>
+				<artifactId>com.github.jmodel.mapper.api</artifactId>
+				<version>${jmodel.mapper.version}</version>
+			</dependency>
+
+			<!-- third party -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
@@ -106,15 +126,47 @@
 				<version>${org.apache.commons.pool.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.github.jmodel</groupId>
-				<artifactId>com.github.jmodel.api</artifactId>
-				<version>${jmodel.version}</version>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-jcs-jcache</artifactId>
+				<version>${org.apache.commons.jcs.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.github.jmodel</groupId>
-				<artifactId>com.github.jmodel.mapper.api</artifactId>
-				<version>${jmodel.mapper.version}</version>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>${org.apache.solr.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>rest</artifactId>
+				<version>${org.elasticsearch.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>sniffer</artifactId>
+				<version>${org.elasticsearch.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${org.mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${sun.jaxb.impl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-core</artifactId>
+				<version>${sun.jaxb.impl.version}</version>
+			</dependency>
+
+			<!-- for test -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

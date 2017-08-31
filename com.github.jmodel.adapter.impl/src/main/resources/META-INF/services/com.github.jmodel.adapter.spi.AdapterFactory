@@ -1,1 +1,1 @@
-com.github.jmodel.adapter.spi.AdapterFactory
+com.github.jmodel.adapter.impl.AdapterFactoryImpl

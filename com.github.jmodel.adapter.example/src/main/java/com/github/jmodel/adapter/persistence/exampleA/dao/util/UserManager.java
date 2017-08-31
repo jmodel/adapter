@@ -1,6 +1,6 @@
 package com.github.jmodel.adapter.persistence.exampleA.dao.util;
 
-import com.github.jmodel.adapter.persistence.exampleA.DatabaseOperation;
+import com.github.jmodel.adapter.impl.persistence.mybatis.DatabaseOperation;
 import com.github.jmodel.adapter.persistence.exampleA.dao.bean.User;
 import com.github.jmodel.adapter.persistence.exampleA.dao.mapper.UserMapper;
 

@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter.persistence.exampleA;
+package com.github.jmodel.adapter.impl.persistence.mybatis;
 
 import java.io.Reader;
 

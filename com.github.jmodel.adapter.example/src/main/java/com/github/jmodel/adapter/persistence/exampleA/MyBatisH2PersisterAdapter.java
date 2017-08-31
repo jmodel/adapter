@@ -9,11 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.github.jmodel.adapter.Logger;
 import com.github.jmodel.adapter.Persister;
+import com.github.jmodel.adapter.impl.persistence.mybatis.ConnectionFactory;
 import com.github.jmodel.adapter.persistence.exampleA.dao.bean.User;
 
-public class MyBatisH2Example {
+public class MyBatisH2PersisterAdapter {
 
-	private final static Logger logger = Logger.getLogger(MyBatisH2Example.class.getName());
+	private final static Logger logger = Logger.getLogger(MyBatisH2PersisterAdapter.class.getName());
 
 	public static void main(String[] args) {
 
@@ -40,7 +41,7 @@ public class MyBatisH2Example {
 			user.setCode("JN");
 			Long userId = Persister.insertObject(session, "insertUser", user);
 
-			logger.info(String.valueOf(userId));
+			logger.info("The new user id is : " + userId);
 			session.commit();
 
 			connection.close();
