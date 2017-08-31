@@ -65,7 +65,7 @@ public class Logger {
 	 *            the message string to be logged
 	 */
 	public void warn(String msg) {
-
+		loggerWrapper.warn(msg);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Logger {
 	 *            the message string to be logged
 	 */
 	public void error(String msg) {
-
+		loggerWrapper.error(msg);
 	}
 
 }

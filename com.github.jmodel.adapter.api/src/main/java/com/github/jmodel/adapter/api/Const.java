@@ -8,17 +8,26 @@ package com.github.jmodel.adapter.api;
  */
 public interface Const {
 
-	public final static String VALIDATOR_ADAPTER_API = "com.github.jmodel.adapter.api.validation.ValidatorAdapter";
-
-	public final static String MAPPER_ADAPTER_API = "com.github.jmodel.adapter.api.mapping.MapperAdapter";
-
-	public final static String SEARCHER_ADAPTER_API = "com.github.jmodel.adapter.api.search.SearcherAdapter";
-
-	public final static String PERSISTER_ADAPTER_API = "com.github.jmodel.adapter.api.persistence.PersistenterAdapter";
-
-	public final static String INTEGRATOR_ADAPTER_API = "com.github.jmodel.adapter.api.integration.IntegratorAdapter";
-
-	public final static String LOGGER_ADAPTER_API = "com.github.jmodel.adapter.api.log.LoggerAdapter";
+	// public final static String ADAPTER_NAMESPACE =
+	// "com.github.jmodel.adapter.api.Adapter";
+	//
+	// public final static String VALIDATOR_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.validation.ValidatorAdapter";
+	//
+	// public final static String MAPPER_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.mapping.MapperAdapter";
+	//
+	// public final static String SEARCHER_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.search.SearcherAdapter";
+	//
+	// public final static String PERSISTER_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.persistence.PersistenterAdapter";
+	//
+	// public final static String INTEGRATOR_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.integration.IntegratorAdapter";
+	//
+	// public final static String LOGGER_ADAPTER_API =
+	// "com.github.jmodel.adapter.api.log.LoggerAdapter";
 
 	public final static String DEFAULT_VALIDATOR_ADAPTER_IMPL = "com.github.jmodel.adapter.impl.validation.ValidatorAdapterImpl";
 
@@ -31,5 +40,7 @@ public interface Const {
 	public final static String DEFAULT_INTEGRATOR_ADAPTER_IMPL = "com.github.jmodel.adapter.impl.integration.IntegratorAdapterImpl";
 
 	public final static String DEFAULT_LOGGER_ADAPTER_IMPL = "com.github.jmodel.adapter.impl.log.JDKLoggerAdapter";
+
+	public final static String DEFAULT_CACHER_ADAPTER_IMPL = "com.github.jmodel.adapter.impl.cache.JCSCacherAdapter";
 
 }

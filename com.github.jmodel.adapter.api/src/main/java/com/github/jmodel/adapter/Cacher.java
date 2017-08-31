@@ -14,9 +14,19 @@ public class Cacher {
 	private final static CacherAdapter cacherAdapter = AdapterFactoryService.getInstance()
 			.getAdapter(CacherAdapter.class);
 
-	public static void put(String namespace, String key, Object value) {
+	public static <T> T get(String region, String key) {
 
 		checkAdapter();
+
+		return cacherAdapter.get(region, key);
+
+	}
+
+	public static <T> void put(String region, String key, T value) {
+
+		checkAdapter();
+
+		cacherAdapter.put(region, key, value);
 
 	}
 

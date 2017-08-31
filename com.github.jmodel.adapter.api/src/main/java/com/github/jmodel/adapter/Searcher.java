@@ -15,30 +15,31 @@ public class Searcher {
 	private final static SearcherAdapter searcherAdapter = AdapterFactoryService.getInstance()
 			.getAdapter(SearcherAdapter.class);
 
-	public static void index(final String indexName, final String type, final String json) {
-		
+	public static void index(String index, String doc) throws AdapterException {
+
 		checkAdapter();
 
+		searcherAdapter.index(index, doc);
 	}
 
-	public static String search(String indexName, Query query) throws AdapterException {
-		
+	public static String search(String index, String query) throws AdapterException {
+
 		checkAdapter();
-		
-		return searcherAdapter.search(indexName, query);
+
+		return searcherAdapter.search(index, query);
 	}
 
 	public static Long count(final String indexName, final String json) {
-		
+
 		checkAdapter();
-		
+
 		return 0L;
 	}
 
 	public static String getId(final String indexName, final String json) {
-		
+
 		checkAdapter();
-		
+
 		return null;
 	}
 

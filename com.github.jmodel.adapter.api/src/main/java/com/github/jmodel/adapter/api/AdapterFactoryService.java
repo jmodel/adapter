@@ -55,22 +55,4 @@ public class AdapterFactoryService {
 		return adapter;
 	}
 
-	public Config getConfig() {
-
-		Config config = null;
-
-		try {
-			Iterator<AdapterFactory> adapterFactorys = loader.iterator();
-			while (config == null && adapterFactorys.hasNext()) {
-				AdapterFactory adapterFactory = adapterFactorys.next();
-				config = adapterFactory.getConfig();
-			}
-		} catch (ServiceConfigurationError serviceError) {
-			config = null;
-			serviceError.printStackTrace();
-		} catch (Exception e) {
-			logger.log(Level.WARNING, e, () -> "Failed to get config");
-		}
-		return config;
-	}
 }

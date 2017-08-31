@@ -10,4 +10,7 @@ import com.github.jmodel.adapter.api.Adapter;
  */
 public interface CacherAdapter extends Adapter {
 
+	public <T> T get(String region, String key);
+	
+	public <T> void put(String region, String key, T value);
 }

@@ -1,7 +1,6 @@
 package com.github.jmodel.adapter.api.search;
 
 import com.github.jmodel.adapter.AdapterException;
-import com.github.jmodel.adapter.Searcher.Query;
 import com.github.jmodel.adapter.api.Adapter;
 
 /**
@@ -12,5 +11,7 @@ import com.github.jmodel.adapter.api.Adapter;
  */
 public interface SearcherAdapter extends Adapter {
 
-	public String search(String indexName, Query query) throws AdapterException;
+	public void index(String index, String doc) throws AdapterException;
+
+	public String search(String index, String query) throws AdapterException;
 }
