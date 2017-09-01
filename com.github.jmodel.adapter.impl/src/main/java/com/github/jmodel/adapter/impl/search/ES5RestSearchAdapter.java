@@ -80,8 +80,8 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 
 		try {
 			HttpEntity entity = new NStringEntity(query, ContentType.APPLICATION_JSON);
-			Response response = restClient.performRequest("POST", indexName, Collections.<String, String>emptyMap(),
-					entity);
+			Response response = restClient.performRequest("POST", indexName + "/_search",
+					Collections.<String, String>emptyMap(), entity);
 			return IOUtils.toString(response.getEntity().getContent(), "UTF-8");
 		} catch (Exception e) {
 			throw new AdapterException("Failed to search", e);
@@ -109,7 +109,7 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 				return null;
 			}
 
-			String hostInfoList = config.getValue("Adapter", "_es5_host_list");
+			String hostInfoList = config.getValue("_es5_host_list", "Adapter", "SearcherAdapter");
 			if (hostInfoList == null) {
 				return null;
 			}

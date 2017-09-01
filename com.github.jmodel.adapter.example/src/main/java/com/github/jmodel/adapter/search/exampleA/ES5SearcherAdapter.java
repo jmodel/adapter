@@ -24,7 +24,7 @@ public class ES5SearcherAdapter {
 
 		try {
 			ES5RestSearchAdapter adatper = new ES5RestSearchAdapter();
-			logger.info(adatper.search("/myindex/mytype/_search", "{\"query\" : {\"match_all\" : {}}}"));
+			logger.info(adatper.search("/myindex/mytype", "{\"query\" : {\"match_all\" : {}}}"));
 
 		} catch (AdapterException e) {
 			e.printStackTrace();
