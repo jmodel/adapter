@@ -49,17 +49,36 @@ public class Configuration {
 
 		if (regionList != null) {
 			Region region = regionList.stream().filter(it -> it.getId().equals(regionId)).findFirst().orElse(null);
-			if (region != null && region.getItemList() != null) {
-				Item item = region.getItemList().stream().filter(it -> it.getId().equals(itemId)).findFirst()
+			if (region != null && region.getItemList() != null && itemId.length > 0) {
+				Item item = region.getItemList().stream().filter(it -> it.getId().equals(itemId[0])).findFirst()
 						.orElse(null);
-				if (item != null && item.getPropertyList() != null) {
-					Property property = item.getPropertyList().stream().filter(it -> it.getName().equals(propertyName))
-							.findFirst().orElse(null);
-					if (property != null) {
-						return property.getValue();
+				if (item != null) {
+					if (itemId.length == 1) {
+						return getValue(propertyName, item);
+					} else {
+						for (int i = 1; item != null && i < itemId.length; i++) {
+							final String subItemId = itemId[i];
+							item = item.getItemList().stream().filter(it -> it.getId().equals(subItemId)).findFirst()
+									.orElse(null);
+						}
+
+						if (item != null) {
+							return getValue(propertyName, item);
+						}
+
 					}
 				}
 			}
+		}
+		return null;
+	}
+
+	private String getValue(String propertyName, Item item) {
+
+		Property property = item.getPropertyList().stream().filter(it -> it.getName().equals(propertyName)).findFirst()
+				.orElse(null);
+		if (property != null) {
+			return property.getValue();
 		}
 		return null;
 	}
