@@ -5,6 +5,9 @@ import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.api.persistence.CrudFunctionFactoryService;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
+import com.github.jmodel.adapter.config.Configuration;
+import com.github.jmodel.adapter.config.ConfigurationLoader;
+import com.github.jmodel.adapter.util.Util;
 
 /**
  * Adapter to use database.
@@ -38,7 +41,9 @@ public class PersistenterAdapterImpl implements PersisterAdapter {
 	@Override
 	public <S, T> Long insertObject(S session, String persistenceName, T obj) throws AdapterException {
 		try {
-			Action<S, T, Long> crudFunction = CrudFunctionFactoryService.getInstance().getCrudFunction(persistenceName);
+			Configuration conf = ConfigurationLoader.getInstance().getConfiguration();
+			String actionUrl = conf.getValue("Action", persistenceName);			
+			Action<S, T, Long> crudFunction = Util.find(actionUrl);
 			return crudFunction.apply(session, obj);
 		} catch (Exception e) {
 			throw new AdapterException("Failed to insert", e);
