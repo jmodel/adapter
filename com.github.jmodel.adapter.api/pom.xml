@@ -32,10 +32,15 @@
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.api</artifactId>
+		</dependency>
 
 		<!-- for test -->
 		<dependency>

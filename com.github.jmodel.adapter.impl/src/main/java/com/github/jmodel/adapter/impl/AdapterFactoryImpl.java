@@ -12,9 +12,9 @@ import com.github.jmodel.adapter.api.mapping.MapperAdapter;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
-import com.github.jmodel.adapter.config.Configuration;
-import com.github.jmodel.adapter.config.ConfigurationLoader;
 import com.github.jmodel.adapter.spi.AdapterFactory;
+import com.github.jmodel.config.Configuration;
+import com.github.jmodel.config.ConfigurationLoader;
 
 /**
  * adapter factory interface.

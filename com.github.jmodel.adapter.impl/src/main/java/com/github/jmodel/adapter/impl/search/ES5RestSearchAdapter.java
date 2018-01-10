@@ -18,8 +18,8 @@ import org.elasticsearch.client.RestClient;
 
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
-import com.github.jmodel.adapter.config.Configuration;
-import com.github.jmodel.adapter.config.ConfigurationLoader;
+import com.github.jmodel.config.Configuration;
+import com.github.jmodel.config.ConfigurationLoader;
 
 /**
  * 

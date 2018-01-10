@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter.api.persistence;
+package com.github.jmodel.adapter.impl.persistence;
 
 @FunctionalInterface
 public interface Action<T, U, R> {

@@ -8,17 +8,21 @@
 		<item id="MapperAdapter" value="com.github.jmodel.adapter.impl.xxx" />
 	</region>
 	<region id="Service">
-		<item id="Search" value="com.github.jmodel.japp.service.search.SearchService">
-			<item id="SearchUser">
-				<property name="index" value="/myindex/mytype" />
-				<property name="mappingURIForSearch" value="3" />
-				<property name="mappingURIForUI" value="4" />
-			</item>
+		<item id="SearchService" value="com.github.jmodel.adapter.SearchService">
+			
+		</item>
+		<item id="AddNewsService">
+			<property name="mAddNews"
+				value="com.github.jmodel.japp.example.mappings.news.AddNews" />
 		</item>
 	</region>
 	<region id="Feature">
 		<item id="Search" value="com.github.jmodel.japp.feature.search.Solr5SearchF"/>
+		<item id="SearchFeature" value="com.github.jmodel.adapter.SearchFeature" />
 	</region>
-
+    <region id="Action">
+		<item id="InsertUser"
+			value="com.github.jmodel.adapter.persistence.exampleA.dao.InsertUser" />
+	</region>
 
 </configuration>

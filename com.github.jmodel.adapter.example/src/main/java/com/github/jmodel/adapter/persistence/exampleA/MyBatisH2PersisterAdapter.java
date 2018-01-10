@@ -39,7 +39,7 @@ public class MyBatisH2PersisterAdapter {
 			User user = new User();
 			user.setName("jianni");
 			user.setCode("JN");
-			Long userId = Persister.insertObject(session, "insertUser", user);
+			Long userId = Persister.insertObject(session, "InsertUser", user);
 
 			logger.info("The new user id is : " + userId);
 			session.commit();
