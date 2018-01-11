@@ -1,6 +1,8 @@
 package com.github.jmodel.adapter.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Properties;
 
 import com.github.jmodel.adapter.Cacher;
 import com.github.jmodel.api.control.AbstractAction;
@@ -48,6 +50,11 @@ public class Util {
 
 				Class<?> c = Class.forName(clzUrl);
 				t = (T) c.newInstance();
+
+				Properties properties = conf.getProperties(regionId, objectId);
+				Method m = c.getMethod("setProperties", Properties.class);
+				m.invoke(t, properties);
+
 				Field[] fields = c.getDeclaredFields();
 				for (Field field : fields) {
 					F f = field.getDeclaredAnnotation(F.class);
