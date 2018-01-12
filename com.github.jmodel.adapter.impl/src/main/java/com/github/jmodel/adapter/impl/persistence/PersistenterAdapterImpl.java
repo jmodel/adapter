@@ -3,7 +3,7 @@ package com.github.jmodel.adapter.impl.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
-import com.github.jmodel.adapter.utils.Util;
+import com.github.jmodel.adapter.utils.AdapterUtil;
 import com.github.jmodel.api.control.ControlEnum;
 
 /**
@@ -26,7 +26,7 @@ public class PersistenterAdapterImpl implements PersisterAdapter {
 		try {
 			T obj = objectMapper.readValue(json, clz);
 
-			Action<S, T, Long> crudFunction = Util.findObject(ControlEnum.ACTION, persistenceName);
+			Action<S, T, Long> crudFunction = AdapterUtil.findObject(ControlEnum.ACTION, persistenceName);
 			return crudFunction.apply(session, obj);
 		} catch (Exception e) {
 			throw new AdapterException("Failed to insert", e);
@@ -37,11 +37,11 @@ public class PersistenterAdapterImpl implements PersisterAdapter {
 	public <S, T> Long insertObject(S session, String persistenceName, T obj) throws AdapterException {
 		try {
 
-			Action<S, T, Long> crudFunction = Util.findObject(ControlEnum.ACTION, persistenceName);
+			Action<S, T, Long> crudFunction = AdapterUtil.findObject(ControlEnum.ACTION, persistenceName);
 
 			return crudFunction.apply(session, obj);
 		} catch (Exception e) {
-			throw new AdapterException("Failed to insert", e);
+			throw new AdapterException("Failed to insert object", e);
 		}
 	}
 }
