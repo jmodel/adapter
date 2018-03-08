@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.api.cache.CacherAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class JCSCacherAdapter implements CacherAdapter {
+public class JCSCacherAdapter extends CacherAdapter {
 
 	@Override
 	public <T> T get(String region, String key) {

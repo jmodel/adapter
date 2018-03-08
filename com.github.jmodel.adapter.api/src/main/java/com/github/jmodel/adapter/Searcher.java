@@ -1,8 +1,8 @@
 package com.github.jmodel.adapter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.jmodel.adapter.api.AdapterFactoryService;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
+import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
 
 /**
  * Public API for search.
@@ -10,43 +10,58 @@ import com.github.jmodel.adapter.api.search.SearcherAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class Searcher {
+public final class Searcher extends Facade {
 
-	private final static SearcherAdapter searcherAdapter = AdapterFactoryService.getInstance()
-			.getAdapter(SearcherAdapter.class);
+	private final static SearcherAdapterFactoryService _searcher_sp = SearcherAdapterFactoryService.getInstance();
 
-	public static void index(String index, String doc) throws AdapterException {
+	private SearcherAdapter searcherAdapter;
 
-		checkAdapter();
+	private Searcher(String id, SearcherAdapter searcherAdapter) {
+		if (searcherAdapter == null) {
+			throw new RuntimeException("Searcher adapter is not found.");
+		}
+		this.id = id;
+		this.searcherAdapter = searcherAdapter;
+	}
 
+	//
+
+	public static Searcher getSearcher() {
+		return getSearcher(null);
+	}
+
+	public static Searcher getSearcher(String name) {
+		String searcherAdapterId = getAdapterId(AdapterTerms.SEARCHER, name);
+		Searcher searcher = facadeManager.getFacade(searcherAdapterId);
+		if (searcher != null) {
+			return searcher;
+		}
+
+		synchronized (facadeManager) {
+			if (searcher == null) {
+				searcher = new Searcher(searcherAdapterId, _searcher_sp.getAdapter(searcherAdapterId));
+				facadeManager.addFacade(searcher);
+			}
+			return searcher;
+		}
+	}
+
+	//
+
+	public void index(String index, String doc) throws AdapterException {
 		searcherAdapter.index(index, doc);
 	}
 
-	public static String search(String index, String query) throws AdapterException {
-
-		checkAdapter();
-
+	public String search(String index, String query) throws AdapterException {
 		return searcherAdapter.search(index, query);
 	}
 
-	public static Long count(final String indexName, final String json) {
-
-		checkAdapter();
-
+	public Long count(final String indexName, final String json) {
 		return 0L;
 	}
 
-	public static String getId(final String indexName, final String json) {
-
-		checkAdapter();
-
+	public String getId(final String indexName, final String json) {
 		return null;
-	}
-
-	private static void checkAdapter() {
-		if (searcherAdapter == null) {
-			throw new RuntimeException("Searcher adapter is not found, please check service provider configuration");
-		}
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)

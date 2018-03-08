@@ -1,7 +1,7 @@
 package com.github.jmodel.adapter;
 
-import com.github.jmodel.adapter.api.AdapterFactoryService;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
+import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
 
 /**
  * Public API for validation.
@@ -9,18 +9,46 @@ import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class Validator {
+public final class Validator extends Facade {
 
-	private final static ValidatorAdapter validatorAdapter = AdapterFactoryService.getInstance()
-			.getAdapter(ValidatorAdapter.class);
+	private final static ValidatorAdapterFactoryService _validator_sp = ValidatorAdapterFactoryService.getInstance();
 
-	public <T> void check(T object, String validationName) {
-		checkAdapter();
+	private ValidatorAdapter validatorAdapter;
+
+	private Validator(String id, ValidatorAdapter validatorAdapter) {
+		if (validatorAdapter == null) {
+			throw new RuntimeException("Validator adapter is not found.");
+		}
+		this.id = id;
+		this.validatorAdapter = validatorAdapter;
 	}
 
-	private static void checkAdapter() {
-		if (validatorAdapter == null) {
-			throw new RuntimeException("Validator adapter is not found, please check service provider configuration");
+	//
+
+	public static Validator getValidator() {
+		return getValidator(null);
+	}
+
+	public static Validator getValidator(String name) {
+		String validatorAdapterId = getAdapterId(AdapterTerms.VALIDATOR, name);
+		Validator validator = facadeManager.getFacade(validatorAdapterId);
+		if (validator != null) {
+			return validator;
+		}
+
+		synchronized (facadeManager) {
+			if (validator == null) {
+				validator = new Validator(validatorAdapterId, _validator_sp.getAdapter(validatorAdapterId));
+				facadeManager.addFacade(validator);
+			}
+			return validator;
 		}
 	}
+
+	//
+
+	public <T> void check(T object, String validationName) throws AdapterException {
+		validatorAdapter.check(object, validationName);
+	}
+
 }

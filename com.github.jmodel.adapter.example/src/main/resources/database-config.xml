@@ -6,7 +6,7 @@
 	<properties resource="database.properties" />
 	<typeAliases>
 		<typeAlias
-			type="com.github.jmodel.adapter.persistence.exampleA.dao.bean.User"
+			type="com.github.jmodel.adapter.example.persistence.exampleA.dao.bean.User"
 			alias="User" />
 	</typeAliases>
 	<environments default="development">
@@ -22,6 +22,6 @@
 	</environments>
 	<mappers>
 		<mapper
-			resource="com/github/jmodel/adapter/persistence/exampleA/dao/mapper/UserMapper.xml" />
+			resource="com/github/jmodel/adapter/example/persistence/exampleA/dao/mapper/UserMapper.xml" />
 	</mappers>
 </configuration>

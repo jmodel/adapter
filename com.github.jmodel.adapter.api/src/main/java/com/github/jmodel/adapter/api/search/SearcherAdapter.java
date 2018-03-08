@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter.api.search;
 
 import com.github.jmodel.adapter.AdapterException;
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
 
 /**
@@ -9,9 +10,16 @@ import com.github.jmodel.adapter.api.Adapter;
  * @author jianni@hotmail.com
  *
  */
-public interface SearcherAdapter extends Adapter {
+public abstract class SearcherAdapter extends Adapter {
 
-	public void index(String index, String doc) throws AdapterException;
+	@Override
+	public String getItemId() {
+		return AdapterTerms.SEARCHER;
+	}
 
-	public String search(String index, String query) throws AdapterException;
+	//
+
+	public abstract void index(String index, String doc) throws AdapterException;
+
+	public abstract String search(String index, String query) throws AdapterException;
 }

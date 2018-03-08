@@ -3,8 +3,6 @@ package com.github.jmodel.adapter.impl.search;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,9 +15,12 @@ import org.elasticsearch.client.ResponseListener;
 import org.elasticsearch.client.RestClient;
 
 import com.github.jmodel.adapter.AdapterException;
+import com.github.jmodel.adapter.AdapterTerms;
+import com.github.jmodel.adapter.api.config.ConfigurationManager;
+import com.github.jmodel.adapter.api.config.IllegalFormatException;
+import com.github.jmodel.adapter.api.config.MissingConfigException;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
-import com.github.jmodel.config.Configuration;
-import com.github.jmodel.config.ConfigurationLoader;
+import com.github.jmodel.adapter.impl.AdapterImplTerms;
 
 /**
  * 
@@ -27,12 +28,7 @@ import com.github.jmodel.config.ConfigurationLoader;
  * @author jianni@hotmail.com
  *
  */
-public class ES5RestSearchAdapter implements SearcherAdapter {
-
-	/**
-	 * JDK Logger
-	 */
-	private final static Logger logger = Logger.getLogger(ES5RestSearchAdapter.class.getName());
+public class ES5RestSearchAdapter extends SearcherAdapter {
 
 	/**
 	 * RestClient is official low-level client for Elasticsearch. Allows to
@@ -43,27 +39,23 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 	 * properly released, as well as the underlying http client instance and its
 	 * threads.
 	 */
-	private static RestClient restClient = getRestClient();
+	private RestClient restClient;
 
 	@Override
 	public void index(String indexName, String doc) throws AdapterException {
 
-		checkRestClient();
-
 		try {
 			HttpEntity entity = new NStringEntity(doc, ContentType.APPLICATION_JSON);
-			restClient.performRequestAsync("POST", indexName, Collections.<String, String>emptyMap(), entity,
+			getRestClient().performRequestAsync("POST", indexName, Collections.<String, String>emptyMap(), entity,
 					new ResponseListener() {
 						@Override
 						public void onSuccess(Response response) {
-							System.out.println(response);
-							logger.log(Level.INFO, () -> "Create search index successfully");
+
 						}
 
 						@Override
 						public void onFailure(Exception e) {
-							e.printStackTrace();
-							logger.log(Level.WARNING, () -> "Failed to create search index");
+
 						}
 					});
 
@@ -76,11 +68,9 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 	@Override
 	public String search(String indexName, String query) throws AdapterException {
 
-		checkRestClient();
-
 		try {
 			HttpEntity entity = new NStringEntity(query, ContentType.APPLICATION_JSON);
-			Response response = restClient.performRequest("POST", indexName + "/_search",
+			Response response = getRestClient().performRequest("POST", indexName + "/_search",
 					Collections.<String, String>emptyMap(), entity);
 			return IOUtils.toString(response.getEntity().getContent(), "UTF-8");
 		} catch (Exception e) {
@@ -88,48 +78,26 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 		}
 	}
 
-	private void checkRestClient() throws AdapterException {
-		if (restClient == null) {
+	private RestClient getRestClient() throws MissingConfigException, IllegalFormatException {
 
-			try {
-				restClient = RestClient.builder(new HttpHost("192.168.71.1", 9200, "http")).build();
-				return;
-			} catch (Exception e) {
-
-			}
-			throw new AdapterException("ES Rest Client is not ready");
+		if (restClient != null) {
+			return restClient;
 		}
-	}
 
-	private static RestClient getRestClient() {
+		synchronized (ConfigurationManager.getInstance()) {
 
-		try {
-			Configuration config = ConfigurationLoader.getInstance().getConfiguration();
-			if (config == null) {
-				return null;
-			}
-
-			String hostInfoList = config.getValue("_es5_host_list", "Adapter", "SearcherAdapter");
+			String hostInfoList = ConfigurationManager.getInstance().getPropertyValue(AdapterImplTerms.ES5_HOST,
+					AdapterTerms.ADAPTER, AdapterTerms.SEARCHER);
 			if (hostInfoList == null) {
-				return null;
+				throw new MissingConfigException("ES5 host info is not found in configuration.");
 			}
 
 			String[] hostInfoArray = StringUtils.split(hostInfoList, ",");
-			if (hostInfoArray.length == 0) {
-				return null;
-			}
-
 			List<HttpHost> httpHostList = new ArrayList<HttpHost>();
-
 			for (int i = 0; i < hostInfoArray.length; i++) {
 				String hostInfo = hostInfoArray[i];
 				String[] hostParamArray = StringUtils.split(hostInfo, ":");
 				if (hostParamArray.length != 3) {
-
-					/*
-					 * log warning message and ignore this
-					 */
-					logger.log(Level.WARNING, () -> "ES host list configuration is wrong");
 					continue;
 				}
 
@@ -137,25 +105,20 @@ public class ES5RestSearchAdapter implements SearcherAdapter {
 				Integer hostPort = Integer.valueOf(hostParamArray[1]);
 				String hostProtocal = hostParamArray[2];
 				if (hostName == null || hostPort == null || hostProtocal == null) {
-					/*
-					 * log warning message and ignore this
-					 */
-					logger.log(Level.WARNING, () -> "ES host list configuration is wrong");
 					continue;
 				}
 				httpHostList.add(new HttpHost(hostName, hostPort, hostProtocal));
-
 			}
+
 			if (httpHostList.size() == 0) {
-				return null;
+				throw new IllegalFormatException(
+						"Expect <host>:<port>:<protocal>,<host>:<port>:<protocal>,... instead of " + hostInfoList);
 			}
+			restClient = RestClient.builder(httpHostList.toArray(new HttpHost[0])).build();
 
-			return RestClient.builder(httpHostList.toArray(new HttpHost[0])).build();
-
-		} catch (Exception e) {
-			logger.log(Level.WARNING, () -> "Rest Client is not ready");
-			return null;
+			return restClient;
 		}
+
 	}
 
 }

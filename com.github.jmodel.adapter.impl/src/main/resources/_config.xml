@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- <!DOCTYPE configuration PUBLIC "-//www.github.com//jmodel//adapter//DTD 
+	Config 0.0.2//EN" "http://www.github.com/jmodel/adapter/dtd/config.dtd"> -->
+<configuration>
+	<region id="Adapter">
+		<item id="LoggerAdapter" value="JDK_LOGGER">
+			<item id="JDK_LOGGER" value="JDK_LOGGER" />
+		</item>
+		<item id="MapperAdapter" value="JMODEL_MAPPER">
+			<item id="JMODEL_MAPPER" value="JMODEL_MAPPER" />
+		</item>
+		<item id="CacherAdapter" value="JCS_CACHER">
+			<item id="JCS_CACHER" value="JCS_CACHER" />
+		</item>
+		<item id="PersisterAdapter" value="MYBATIS_PERSISTER">
+			<item id="MYBATIS_PERSISTER" value="MYBATIS_PERSISTER" />
+		</item>
+		<item id="SearcherAdapter" value="ES5_REST_SEARCHER">
+			<property name="ES5_HOST" value="127.0.0.1:9200:http" />
+			<item id="ES5_REST_SEARCHER" value="ES5_REST_SEARCHER">
+				<property name="ES5_HOST" value="127.0.0.1:9200:http" />
+			</item>
+		</item>
+	</region>
+</configuration>

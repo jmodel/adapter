@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter.api.persistence;
 
 import com.github.jmodel.adapter.AdapterException;
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
 
 /**
@@ -9,10 +10,16 @@ import com.github.jmodel.adapter.api.Adapter;
  * @author jianni@hotmail.com
  *
  */
-public interface PersisterAdapter extends Adapter {
+public abstract class PersisterAdapter extends Adapter {
 
-	public <S, T> Long insert(S session, String persistenceName, String json, Class<T> clz) throws AdapterException;
+	@Override
+	public String getItemId() {
+		return AdapterTerms.PERSISTER;
+	}
 
-	public <S, T> Long insertObject(S session, String persistenceName, T object) throws AdapterException;
+	public abstract <S, T> Long insert(S session, Action<?, ?, ?> action, String json, Class<T> clz)
+			throws AdapterException;
+
+	public abstract <S, T> Long insertObject(S session, Action<?, ?, ?> action, T object) throws AdapterException;
 
 }

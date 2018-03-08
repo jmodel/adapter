@@ -1,7 +1,7 @@
 package com.github.jmodel.adapter;
 
-import com.github.jmodel.adapter.api.AdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
+import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
 
 /**
@@ -10,22 +10,62 @@ import com.github.jmodel.adapter.api.log.LoggerWrapper;
  * @author jianni@hotmail.com
  *
  */
-public class Logger {
+public final class Logger extends Facade {
 
-	private final static LoggerAdapter loggerAdapter = AdapterFactoryService.getInstance()
-			.getAdapter(LoggerAdapter.class);
+	private final static LoggerAdapterFactoryService _logger_sp = LoggerAdapterFactoryService.getInstance();
 
 	private LoggerWrapper<?> loggerWrapper;
 
-	private Logger(LoggerWrapper<?> loggerAdapter) {
-		this.loggerWrapper = loggerAdapter;
+	private LoggerAdapter loggerAdapter;
+
+	/**
+	 * internal use
+	 * 
+	 * @param id
+	 * @param loggerAdapter
+	 */
+	private Logger(String id, LoggerAdapter loggerAdapter) {
+		if (loggerAdapter == null) {
+			throw new RuntimeException("Logger adapter is not found.");
+		}
+		this.id = id;
+		this.loggerAdapter = loggerAdapter;
 	}
 
+	/**
+	 * external use
+	 * 
+	 * @param loggerWrapper
+	 */
+	private Logger(LoggerWrapper<?> loggerWrapper) {
+		this.loggerWrapper = loggerWrapper;
+
+	}
+
+	//
+
 	public static Logger getLogger(String clzName) {
-		if (loggerAdapter == null) {
-			throw new RuntimeException("Logger adapter is not found, please check service provider configuration");
+		return getLogger(null, clzName);
+	}
+
+	public static Logger getLogger(String name, String clzName) {
+		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, name);
+		Logger logger = facadeManager.getFacade(loggerAdapterId);
+		if (logger != null) {
+			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(clzName));
 		}
-		return new Logger(loggerAdapter.getLoggerWrapper(clzName));
+
+		synchronized (facadeManager) {
+			if (logger == null) {
+				logger = new Logger(loggerAdapterId, _logger_sp.getAdapter(loggerAdapterId));
+				facadeManager.addFacade(logger);
+			}
+			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(clzName));
+		}
+	}
+
+	public LoggerAdapter getLoggerAdapter() {
+		return loggerAdapter;
 	}
 
 	/**

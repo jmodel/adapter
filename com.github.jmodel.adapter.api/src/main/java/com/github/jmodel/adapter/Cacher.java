@@ -1,7 +1,7 @@
 package com.github.jmodel.adapter;
 
-import com.github.jmodel.adapter.api.AdapterFactoryService;
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
+import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
 
 /**
  * Public API for cache.
@@ -9,30 +9,50 @@ import com.github.jmodel.adapter.api.cache.CacherAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class Cacher {
+public final class Cacher extends Facade {
 
-	private final static CacherAdapter cacherAdapter = AdapterFactoryService.getInstance()
-			.getAdapter(CacherAdapter.class);
+	private final static CacherAdapterFactoryService _cacher_sp = CacherAdapterFactoryService.getInstance();
 
-	public static <T> T get(String region, String key) {
+	private CacherAdapter cacherAdapter;
 
-		checkAdapter();
-
-		return cacherAdapter.get(region, key);
-
-	}
-
-	public static <T> void put(String region, String key, T value) {
-
-		checkAdapter();
-
-		cacherAdapter.put(region, key, value);
-
-	}
-
-	private static void checkAdapter() {
+	private Cacher(String id, CacherAdapter cacherAdapter) {
 		if (cacherAdapter == null) {
-			throw new RuntimeException("Cacher adapter is not found, please check service provider configuration");
+			throw new RuntimeException("Cacher adapter is not found.");
+		}
+		this.id = id;
+		this.cacherAdapter = cacherAdapter;
+	}
+
+	//
+
+	public static Cacher getCacher() {
+		return getCacher(null);
+	}
+
+	public static Cacher getCacher(String name) {
+		String cacherAdapterId = getAdapterId(AdapterTerms.CACHER, name);
+		Cacher cacher = facadeManager.getFacade(cacherAdapterId);
+		if (cacher != null) {
+			return cacher;
+		}
+
+		synchronized (facadeManager) {
+			if (cacher == null) {
+				cacher = new Cacher(cacherAdapterId, _cacher_sp.getAdapter(cacherAdapterId));
+				facadeManager.addFacade(cacher);
+			}
+			return cacher;
 		}
 	}
+
+	//
+
+	public <T> T get(String region, String key) {
+		return cacherAdapter.get(region, key);
+	}
+
+	public <T> void put(String region, String key, T value) {
+		cacherAdapter.put(region, key, value);
+	}
+
 }

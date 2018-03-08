@@ -2,8 +2,8 @@ package com.github.jmodel.adapter;
 
 import java.io.Serializable;
 
-import com.github.jmodel.adapter.api.AdapterFactoryService;
 import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
+import com.github.jmodel.adapter.api.integration.IntegratorAdapterFactoryService;
 
 /**
  * Public API for integration.
@@ -11,18 +11,46 @@ import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class Integrator {
+public final class Integrator extends Facade {
 
-	private final static IntegratorAdapter integratorAdapter = AdapterFactoryService.getInstance()
-			.getAdapter(IntegratorAdapter.class);
+	private final static IntegratorAdapterFactoryService _integrator_sp = IntegratorAdapterFactoryService.getInstance();
 
-	public static void dispatch(String pointName, Serializable content) {
-		checkAdapter();
+	private IntegratorAdapter integratorAdapter;
+
+	private Integrator(String id, IntegratorAdapter integratorAdapter) {
+		if (integratorAdapter == null) {
+			throw new RuntimeException("Integrator adapter is not found.");
+		}
+		this.id = id;
+		this.integratorAdapter = integratorAdapter;
 	}
 
-	private static void checkAdapter() {
-		if (integratorAdapter == null) {
-			throw new RuntimeException("Integrator adapter is not found, please check service provider configuration");
+	//
+
+	public static Integrator getIntegrator() {
+		return getIntegrator(null);
+	}
+
+	public static Integrator getIntegrator(String name) {
+		String integratorAdapterId = getAdapterId(AdapterTerms.INTEGRATOR, name);
+		Integrator integrator = facadeManager.getFacade(integratorAdapterId);
+		if (integrator != null) {
+			return integrator;
+		}
+
+		synchronized (facadeManager) {
+			if (integrator == null) {
+				integrator = new Integrator(integratorAdapterId, _integrator_sp.getAdapter(integratorAdapterId));
+				facadeManager.addFacade(integrator);
+			}
+			return integrator;
 		}
 	}
+
+	//
+
+	public void dispatch(String pointName, Serializable content) {
+		integratorAdapter.dispatch();
+	}
+
 }

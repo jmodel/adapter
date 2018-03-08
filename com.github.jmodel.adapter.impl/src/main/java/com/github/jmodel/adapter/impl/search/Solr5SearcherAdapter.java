@@ -22,7 +22,7 @@ import com.github.jmodel.adapter.api.search.SearcherAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class Solr5SearcherAdapter implements SearcherAdapter {
+public class Solr5SearcherAdapter extends SearcherAdapter {
 
 	private final Map<String, SolrClient> solrQueryClientMap = new HashMap<String, SolrClient>();
 

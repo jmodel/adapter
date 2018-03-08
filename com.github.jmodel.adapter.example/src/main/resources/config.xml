@@ -2,27 +2,10 @@
 <!-- <!DOCTYPE configuration PUBLIC "-//www.github.com//jmodel//adapter//DTD 
 	Config 0.0.2//EN" "http://www.github.com/jmodel/adapter/dtd/config.dtd"> -->
 <configuration>
-
-	<region id="Adapter">
-		<item id="LoggerAdapter" value="com.github.jmodel.adapter.impl.xxx" />
-		<item id="MapperAdapter" value="com.github.jmodel.adapter.impl.xxx" />
-	</region>
 	<region id="Service">
-		<item id="SearchService" value="com.github.jmodel.adapter.SearchService">
-			
-		</item>
-		<item id="AddNewsService">
-			<property name="mAddNews"
-				value="com.github.jmodel.japp.example.mappings.news.AddNews" />
-		</item>
+		<item id="Search" value="SearchService" />
 	</region>
-	<region id="Feature">
-		<item id="Search" value="com.github.jmodel.japp.feature.search.Solr5SearchF"/>
-		<item id="SearchFeature" value="com.github.jmodel.adapter.SearchFeature" />
+	<region id="Action">
+		<item id="InsertUser" value="InsertUser" />
 	</region>
-    <region id="Action">
-		<item id="InsertUser"
-			value="com.github.jmodel.adapter.persistence.exampleA.dao.InsertUser" />
-	</region>
-
 </configuration>

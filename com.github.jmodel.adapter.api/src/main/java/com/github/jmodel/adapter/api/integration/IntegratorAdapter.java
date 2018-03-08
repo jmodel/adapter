@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter.api.integration;
 
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
 
 /**
@@ -8,6 +9,12 @@ import com.github.jmodel.adapter.api.Adapter;
  * @author jianni@hotmail.com
  *
  */
-public interface IntegratorAdapter extends Adapter {
+public abstract class IntegratorAdapter extends Adapter {
 
+	@Override
+	public String getItemId() {
+		return AdapterTerms.INTEGRATOR;
+	}
+
+	public abstract void dispatch();
 }

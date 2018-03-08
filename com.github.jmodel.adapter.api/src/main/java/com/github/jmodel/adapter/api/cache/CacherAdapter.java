@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter.api.cache;
 
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
 
 /**
@@ -8,9 +9,16 @@ import com.github.jmodel.adapter.api.Adapter;
  * @author jianni@hotmail.com
  *
  */
-public interface CacherAdapter extends Adapter {
+public abstract class CacherAdapter extends Adapter {
 
-	public <T> T get(String region, String key);
-	
-	public <T> void put(String region, String key, T value);
+	@Override
+	public String getItemId() {
+		return AdapterTerms.CACHER;
+	}
+
+	//
+
+	public abstract <T> T get(String region, String key);
+
+	public abstract <T> void put(String region, String key, T value);
 }

@@ -37,10 +37,10 @@
 			<artifactId>jaxb-core</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--   dependency>
 			<groupId>com.github.jmodel</groupId>
 			<artifactId>com.github.jmodel.api</artifactId>
-		</dependency>
+		</dependency -->
 
 		<!-- for test -->
 		<dependency>
