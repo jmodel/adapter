@@ -1,5 +1,7 @@
 package com.github.jmodel.adapter;
 
+import java.util.function.Supplier;
+
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
 import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
@@ -94,8 +96,8 @@ public final class Logger extends Facade {
 	 * @param msg
 	 *            the message string to be logged
 	 */
-	public void info(String msg) {
-		loggerWrapper.info(msg);
+	public void info(Supplier<String> msgSupplier) {
+		loggerWrapper.info(msgSupplier);
 	}
 
 	/**

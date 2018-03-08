@@ -16,7 +16,6 @@ import org.elasticsearch.client.RestClient;
 
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.AdapterTerms;
-import com.github.jmodel.adapter.api.config.ConfigurationManager;
 import com.github.jmodel.adapter.api.config.IllegalFormatException;
 import com.github.jmodel.adapter.api.config.MissingConfigException;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
@@ -84,10 +83,10 @@ public class ES5RestSearchAdapter extends SearcherAdapter {
 			return restClient;
 		}
 
-		synchronized (ConfigurationManager.getInstance()) {
+		synchronized (cm) {
 
-			String hostInfoList = ConfigurationManager.getInstance().getPropertyValue(AdapterImplTerms.ES5_HOST,
-					AdapterTerms.ADAPTER, AdapterTerms.SEARCHER);
+			String hostInfoList = cm.getPropertyValue(AdapterImplTerms.ES5_HOST, AdapterTerms.ADAPTER,
+					AdapterTerms.SEARCHER);
 			if (hostInfoList == null) {
 				throw new MissingConfigException("ES5 host info is not found in configuration.");
 			}
@@ -118,7 +117,6 @@ public class ES5RestSearchAdapter extends SearcherAdapter {
 
 			return restClient;
 		}
-
 	}
 
 }

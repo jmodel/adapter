@@ -1,5 +1,7 @@
 package com.github.jmodel.adapter.api.log;
 
+import java.util.function.Supplier;
+
 /**
  * Logger wrapper
  * 
@@ -10,7 +12,7 @@ package com.github.jmodel.adapter.api.log;
  */
 public interface LoggerWrapper<T> {
 
-	public void info(String msg);
+	public void info(Supplier<String> msgSupplier);
 
 	public void warn(String msg);
 

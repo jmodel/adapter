@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter.api;
+package com.github.jmodel.adapter.api.config;
 
 /**
  * 
@@ -7,7 +7,7 @@ package com.github.jmodel.adapter.api;
  * @author jianni@hotmail.com
  *
  */
-public interface Configurable {
+public interface Configurable extends ConfigurationAware {
 
 	public String getRegionId();
 

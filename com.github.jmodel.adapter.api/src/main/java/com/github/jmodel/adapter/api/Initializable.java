@@ -1,6 +1,6 @@
 package com.github.jmodel.adapter.api;
 
-import com.github.jmodel.adapter.api.config.ConfigurationManager;
+import com.github.jmodel.adapter.api.config.ConfigurationAware;
 
 /**
  * 
@@ -8,9 +8,7 @@ import com.github.jmodel.adapter.api.config.ConfigurationManager;
  * @author jianni@hotmail.com
  *
  */
-public abstract class Initializable {
-
-	protected final static ConfigurationManager cm = ConfigurationManager.getInstance();
+public abstract class Initializable implements ConfigurationAware {
 
 	protected Boolean inited = false;
 

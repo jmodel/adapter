@@ -1,6 +1,6 @@
 package com.github.jmodel.adapter;
 
-import com.github.jmodel.adapter.api.config.ConfigurationManager;
+import com.github.jmodel.adapter.api.config.ConfigurationAware;
 import com.github.jmodel.adapter.api.config.ConfiguratorAdapter;
 import com.github.jmodel.adapter.api.config.ConfiguratorAdapterFactoryService;
 
@@ -10,11 +10,9 @@ import com.github.jmodel.adapter.api.config.ConfiguratorAdapterFactoryService;
  * @author jianni@hotmail.com
  *
  */
-public abstract class Facade {
+public abstract class Facade implements ConfigurationAware {
 
 	protected final static FacadeManager facadeManager = FacadeManager.getFacadeManager();
-
-	protected final static ConfigurationManager cm = ConfigurationManager.getInstance();
 
 	protected final static ConfiguratorAdapterFactoryService _config_sp = ConfiguratorAdapterFactoryService
 			.getInstance();

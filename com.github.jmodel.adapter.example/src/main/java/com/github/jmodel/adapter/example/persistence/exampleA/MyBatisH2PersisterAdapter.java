@@ -49,7 +49,7 @@ public class MyBatisH2PersisterAdapter {
 			Persister persister = Persister.getPersister();
 			Long userId = persister.insertObject(session, JappUtil.getAction(AdapterExampleTerms.INSERT_USER), user);
 
-			logger.info("The new user id is : " + userId);
+			logger.info(() -> "The new user id is : " + userId);
 			session.commit();
 
 			connection.close();

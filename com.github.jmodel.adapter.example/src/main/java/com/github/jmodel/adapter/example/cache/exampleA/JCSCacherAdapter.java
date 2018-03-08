@@ -18,7 +18,7 @@ public class JCSCacherAdapter {
 
 		cacher.put("objectCache", "1", new String("22"));
 
-		logger.info(cacher.get("objectCache", "1"));
-		logger.info(cacher.get("objectCache", "1"));
+		logger.info(() -> cacher.get("objectCache", "1"));
+		logger.info(() -> cacher.get("objectCache", "1"));
 	}
 }

@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter.impl.log;
 
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -25,10 +26,12 @@ public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 	}
 
 	@Override
-	public void info(String msg) {
-		LogRecord logRecord = new LogRecord(Level.INFO, msg);
-		inferCaller(logRecord);
-		logger.log(logRecord);
+	public void info(Supplier<String> msgSupplier) {
+		if (logger.isLoggable(Level.INFO)) {
+			LogRecord logRecord = new LogRecord(Level.INFO, msgSupplier.get());
+			inferCaller(logRecord);
+			logger.log(logRecord);
+		}
 	}
 
 	@Override

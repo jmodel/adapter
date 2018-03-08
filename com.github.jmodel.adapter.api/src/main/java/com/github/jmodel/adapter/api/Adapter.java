@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter.api;
 
 import com.github.jmodel.adapter.AdapterTerms;
+import com.github.jmodel.adapter.api.config.Configurable;
 
 /**
  * The Adapter concept is used in mutable business application context. For
