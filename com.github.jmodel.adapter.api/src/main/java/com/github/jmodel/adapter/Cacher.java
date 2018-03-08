@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
 import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
 

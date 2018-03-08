@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
 

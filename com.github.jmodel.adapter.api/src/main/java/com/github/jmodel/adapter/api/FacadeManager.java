@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter;
+package com.github.jmodel.adapter.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +32,8 @@ public final class FacadeManager {
 		}
 
 	}
+
+	//
 
 	@SuppressWarnings("unchecked")
 	public <T> T getFacade(String id) {

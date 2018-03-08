@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
 import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
 

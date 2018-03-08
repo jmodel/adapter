@@ -1,8 +1,7 @@
-package com.github.jmodel.adapter;
+package com.github.jmodel.adapter.api;
 
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.config.ConfigurationAware;
-import com.github.jmodel.adapter.api.config.ConfiguratorAdapter;
-import com.github.jmodel.adapter.api.config.ConfiguratorAdapterFactoryService;
 
 /**
  * Adapter facade.
@@ -14,21 +13,10 @@ public abstract class Facade implements ConfigurationAware {
 
 	protected final static FacadeManager facadeManager = FacadeManager.getFacadeManager();
 
-	protected final static ConfiguratorAdapterFactoryService _config_sp = ConfiguratorAdapterFactoryService
-			.getInstance();
-
 	protected String id;
 
 	protected String getId() {
 		return id;
-	}
-
-	protected static ConfiguratorAdapter<?> getConfiguratorAdapter(String configuratorAdapterId) {
-		if (configuratorAdapterId == null) {
-			return _config_sp.getAdapter();
-		}
-
-		return _config_sp.getAdapter(configuratorAdapterId);
 	}
 
 	protected static String getAdapterId(String adapterTypeName, String adapterName) {

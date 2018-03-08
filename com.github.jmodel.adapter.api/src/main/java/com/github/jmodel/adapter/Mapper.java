@@ -2,6 +2,7 @@ package com.github.jmodel.adapter;
 
 import java.util.Map;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.mapping.MapperAdapter;
 import com.github.jmodel.adapter.api.mapping.MapperAdapterFactoryService;
 

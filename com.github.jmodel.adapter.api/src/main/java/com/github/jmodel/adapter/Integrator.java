@@ -2,6 +2,7 @@ package com.github.jmodel.adapter;
 
 import java.io.Serializable;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
 import com.github.jmodel.adapter.api.integration.IntegratorAdapterFactoryService;
 

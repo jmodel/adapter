@@ -2,6 +2,7 @@ package com.github.jmodel.adapter;
 
 import java.util.function.Supplier;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
 import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;

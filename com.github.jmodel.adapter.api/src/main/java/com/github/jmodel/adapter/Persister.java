@@ -2,6 +2,7 @@ package com.github.jmodel.adapter;
 
 import java.util.List;
 
+import com.github.jmodel.adapter.api.Facade;
 import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapterFactoryService;
