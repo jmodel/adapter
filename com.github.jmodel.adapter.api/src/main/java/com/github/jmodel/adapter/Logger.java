@@ -8,13 +8,34 @@ import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
 
 /**
- * Public API for Log.
+ * Simple log facade.
+ * <p>
+ * In enterprise environment, log feature required could be very flexible and
+ * complicated. For example, the message needs to be writen to local disk,
+ * remote database, remote log service, or sent to someone via email at the same
+ * time. Embedding the above (even more complex) in business logic code is not a
+ * good idea. Actually, when writing business logic code, the only thing we
+ * should care is logging something, why need to consider 'how-detail' at that
+ * time.
+ * <p>
+ * Logger can shield the complexity. The business logic coder just need to know
+ * 'log' concept and 'how' term.
+ * <p>
+ * The matter of log is handed over to log expert who is able to write a
+ * specific log adapter. Term is common language between log expert and business
+ * logic coder.
+ * <p>
+ * For performance reason, the log methods enforce to use funtional interface
+ * (delayed execution) to get message.
  * 
  * @author jianni@hotmail.com
  *
  */
 public final class Logger extends Facade {
 
+	/**
+	 * Logger adapter factory service
+	 */
 	private final static LoggerAdapterFactoryService _logger_sp = LoggerAdapterFactoryService.getInstance();
 
 	private LoggerWrapper<?> loggerWrapper;
@@ -25,7 +46,9 @@ public final class Logger extends Facade {
 	 * internal use
 	 * 
 	 * @param id
+	 *            id of logger adapter
 	 * @param loggerAdapter
+	 *            logger adapter instance
 	 */
 	private Logger(String id, LoggerAdapter loggerAdapter) {
 		if (loggerAdapter == null) {
@@ -39,6 +62,7 @@ public final class Logger extends Facade {
 	 * external use
 	 * 
 	 * @param loggerWrapper
+	 *            logger wrapper
 	 */
 	private Logger(LoggerWrapper<?> loggerWrapper) {
 		this.loggerWrapper = loggerWrapper;
@@ -47,15 +71,32 @@ public final class Logger extends Facade {
 
 	//
 
-	public static Logger getLogger(String clzName) {
-		return getLogger(null, clzName);
+	/**
+	 * Create a Logger object which uses default logger adapter to write message.
+	 * 
+	 * @param name
+	 *            A name for the logger
+	 * @return a suitable Logger
+	 */
+	public static Logger getLogger(String name) {
+		return getLogger(null, name);
 	}
 
-	public static Logger getLogger(String name, String clzName) {
-		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, name);
+	/**
+	 * Create a Logger object which uses the logger adapter specified by term to
+	 * write message.
+	 * 
+	 * @param term
+	 *            A term for the logger adapter
+	 * @param name
+	 *            A name for the logger
+	 * @return a suitable Logger
+	 */
+	public static Logger getLogger(String term, String name) {
+		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, term);
 		Logger logger = facadeManager.getFacade(loggerAdapterId);
 		if (logger != null) {
-			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(clzName));
+			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
 		}
 
 		synchronized (facadeManager) {
@@ -63,39 +104,37 @@ public final class Logger extends Facade {
 				logger = new Logger(loggerAdapterId, _logger_sp.getAdapter(loggerAdapterId));
 				facadeManager.addFacade(logger);
 			}
-			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(clzName));
+			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
 		}
 	}
 
-	public LoggerAdapter getLoggerAdapter() {
-		return loggerAdapter;
-	}
+	//
 
 	/**
 	 * Log a message at the DEBUG level.
 	 *
-	 * @param msg
-	 *            the message string to be logged
+	 * @param msgSupplier
+	 *            the message supplier to be logged
 	 */
-	public void debug(String msg) {
+	public void debug(Supplier<String> msgSupplier) {
 
 	}
 
 	/**
 	 * Log a message at the TRACE level.
 	 *
-	 * @param msg
-	 *            the message string to be logged
+	 * @param msgSupplier
+	 *            the message supplier to be logged
 	 */
-	public void trace(String msg) {
+	public void trace(Supplier<String> msgSupplier) {
 
 	}
 
 	/**
 	 * Log a message at the INFO level.
 	 *
-	 * @param msg
-	 *            the message string to be logged
+	 * @param msgSupplier
+	 *            the message supplier to be logged
 	 */
 	public void info(Supplier<String> msgSupplier) {
 		loggerWrapper.info(msgSupplier);
@@ -104,8 +143,8 @@ public final class Logger extends Facade {
 	/**
 	 * Log a message at the WARN level.
 	 *
-	 * @param msg
-	 *            the message string to be logged
+	 * @param msgSupplier
+	 *            the message supplier to be logged
 	 */
 	public void warn(Supplier<String> msgSupplier) {
 		loggerWrapper.warn(msgSupplier);
@@ -114,11 +153,17 @@ public final class Logger extends Facade {
 	/**
 	 * Log a message at the ERROR level.
 	 *
-	 * @param msg
-	 *            the message string to be logged
+	 * @param msgSupplier
+	 *            the message supplier to be logged
 	 */
 	public void error(Supplier<String> msgSupplier) {
 		loggerWrapper.error(msgSupplier);
+	}
+
+	//
+
+	private LoggerAdapter getLoggerAdapter() {
+		return loggerAdapter;
 	}
 
 }

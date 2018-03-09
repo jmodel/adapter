@@ -88,11 +88,13 @@
 		<dependencies>
 
 			<!-- jmodel series -->
+			<!--  
 			<dependency>
 				<groupId>com.github.jmodel</groupId>
 				<artifactId>com.github.jmodel.api</artifactId>
 				<version>${jmodel.version}</version>
 			</dependency>
+			-->
 			<dependency>
 				<groupId>com.github.jmodel</groupId>
 				<artifactId>com.github.jmodel.mapper.api</artifactId>

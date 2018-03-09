@@ -22,10 +22,12 @@
 			<artifactId>com.github.jmodel.adapter.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>com.github.jmodel</groupId>
 			<artifactId>com.github.jmodel.api</artifactId>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>com.github.jmodel</groupId>
 			<artifactId>com.github.jmodel.mapper.api</artifactId>

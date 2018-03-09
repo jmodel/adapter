@@ -5,13 +5,19 @@ import com.github.jmodel.adapter.api.cache.CacherAdapter;
 import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
 
 /**
- * Public API for cache.
+ * Simple cache facade.
+ * <p>
  * 
  * @author jianni@hotmail.com
+ * @see com.github.jmodel.adapter.api.Facade
+ * @see com.github.jmodel.adapter.Logger
  *
  */
 public final class Cacher extends Facade {
 
+	/**
+	 * Cacher adapter factory service
+	 */
 	private final static CacherAdapterFactoryService _cacher_sp = CacherAdapterFactoryService.getInstance();
 
 	private CacherAdapter cacherAdapter;
