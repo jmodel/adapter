@@ -25,6 +25,26 @@ public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 		this.logger = logger;
 	}
 
+	//
+
+	@Override
+	public void debug(Supplier<String> msgSupplier) {
+		if (logger.isLoggable(Level.ALL)) {
+			LogRecord logRecord = new LogRecord(Level.ALL, msgSupplier.get());
+			inferCaller(logRecord);
+			logger.log(logRecord);
+		}
+	}
+
+	@Override
+	public void trace(Supplier<String> msgSupplier) {
+		if (logger.isLoggable(Level.FINE)) {
+			LogRecord logRecord = new LogRecord(Level.FINE, msgSupplier.get());
+			inferCaller(logRecord);
+			logger.log(logRecord);
+		}
+	}
+
 	@Override
 	public void info(Supplier<String> msgSupplier) {
 		if (logger.isLoggable(Level.INFO)) {
@@ -35,18 +55,24 @@ public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 	}
 
 	@Override
-	public void warn(String msg) {
-		LogRecord logRecord = new LogRecord(Level.WARNING, msg);
-		inferCaller(logRecord);
-		logger.log(logRecord);
+	public void warn(Supplier<String> msgSupplier) {
+		if (logger.isLoggable(Level.WARNING)) {
+			LogRecord logRecord = new LogRecord(Level.WARNING, msgSupplier.get());
+			inferCaller(logRecord);
+			logger.log(logRecord);
+		}
 	}
 
 	@Override
-	public void error(String msg) {
-		LogRecord logRecord = new LogRecord(Level.SEVERE, msg);
-		inferCaller(logRecord);
-		logger.log(logRecord);
+	public void error(Supplier<String> msgSupplier) {
+		if (logger.isLoggable(Level.SEVERE)) {
+			LogRecord logRecord = new LogRecord(Level.SEVERE, msgSupplier.get());
+			inferCaller(logRecord);
+			logger.log(logRecord);
+		}
 	}
+
+	//
 
 	private void inferCaller(LogRecord logRecord) {
 		JavaLangAccess access = SharedSecrets.getJavaLangAccess();

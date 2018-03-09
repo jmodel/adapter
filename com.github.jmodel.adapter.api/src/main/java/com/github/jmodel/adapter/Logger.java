@@ -107,8 +107,8 @@ public final class Logger extends Facade {
 	 * @param msg
 	 *            the message string to be logged
 	 */
-	public void warn(String msg) {
-		loggerWrapper.warn(msg);
+	public void warn(Supplier<String> msgSupplier) {
+		loggerWrapper.warn(msgSupplier);
 	}
 
 	/**
@@ -117,8 +117,8 @@ public final class Logger extends Facade {
 	 * @param msg
 	 *            the message string to be logged
 	 */
-	public void error(String msg) {
-		loggerWrapper.error(msg);
+	public void error(Supplier<String> msgSupplier) {
+		loggerWrapper.error(msgSupplier);
 	}
 
 }

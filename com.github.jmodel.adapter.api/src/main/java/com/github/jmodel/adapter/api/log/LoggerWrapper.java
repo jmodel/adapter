@@ -12,9 +12,13 @@ import java.util.function.Supplier;
  */
 public interface LoggerWrapper<T> {
 
+	public void debug(Supplier<String> msgSupplier);
+
+	public void trace(Supplier<String> msgSupplier);
+
 	public void info(Supplier<String> msgSupplier);
 
-	public void warn(String msg);
+	public void warn(Supplier<String> msgSupplier);
 
-	public void error(String msg);
+	public void error(Supplier<String> msgSupplier);
 }

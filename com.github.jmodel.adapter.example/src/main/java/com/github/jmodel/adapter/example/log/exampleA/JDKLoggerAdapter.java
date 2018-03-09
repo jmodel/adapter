@@ -15,17 +15,11 @@ public class JDKLoggerAdapter {
 
 	public static void main(String[] args) {
 
-		System.out.println(Thread.currentThread().hashCode());
-		logger.info(() -> getMsg() + "This info log is printed out by JDK Logger");
+		logger.info(() -> "This info msg is printed out by JDK Logger");
 
-		logger.warn("This warning log is printed out by JDK Logger");
+		logger.warn(() -> "This warning msg is printed out by JDK Logger");
 
-		logger.error("This error log is printed out by JDK Logger");
-	}
-
-	private static String getMsg() {
-		System.out.println("======");
-		return "xxx";
+		logger.error(() -> "This error msg is printed out by JDK Logger");
 	}
 
 }
