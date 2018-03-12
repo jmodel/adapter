@@ -3,6 +3,7 @@ package com.github.jmodel.adapter;
 import java.util.List;
 
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapterFactoryService;
@@ -33,17 +34,17 @@ public final class Persister extends Facade {
 		return getPersister(null);
 	}
 
-	public static Persister getPersister(String name) {
-		String persisterAdapterId = getAdapterId(AdapterTerms.PERSISTER, name);
-		Persister persister = facadeManager.getFacade(persisterAdapterId);
+	public static Persister getPersister(Term t) {
+		String persisterAdapterId = getAdapterId(AdapterTerms.PERSISTER, t);
+		Persister persister = fm.getFacade(persisterAdapterId);
 		if (persister != null) {
 			return persister;
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (persister == null) {
 				persister = new Persister(persisterAdapterId, _persister_sp.getAdapter(persisterAdapterId));
-				facadeManager.addFacade(persister);
+				fm.addFacade(persister);
 			}
 			return persister;
 		}

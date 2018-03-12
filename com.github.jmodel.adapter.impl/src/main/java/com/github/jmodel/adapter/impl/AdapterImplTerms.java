@@ -1,30 +1,68 @@
 package com.github.jmodel.adapter.impl;
 
-public interface AdapterImplTerms {
+import com.github.jmodel.adapter.api.Term;
+
+public enum AdapterImplTerms implements Term {
 
 	// Configuration
-	public static final String LFS_CONFIGURATOR = "LFS_CONFIGURATOR";
+	LFS_CONFIGURATOR {
+		public String toString() {
+			return "LFS_CONFIGURATOR";
+		}
+	},
 
 	// Cache
-	public static final String JCS_CACHER = "JCS_CACHER";
+	JCS_CACHER {
+		public String toString() {
+			return "JCS_CACHER";
+		}
+	},
 
 	// Integration
-	public static final String INTEGRATION_CLIENT = "INTEGRATION_CLIENT";
+	INTEGRATION_CLIENT {
+		public String toString() {
+			return "INTEGRATION_CLIENT";
+		}
+	},
 
 	// Log
-	public static final String JDK_LOGGER = "JDK_LOGGER";
+	JDK_LOGGER {
+		public String toString() {
+			return "JDK_LOGGER";
+		}
+	},
 
 	// Mapping
-	public static final String JMODEL_MAPPER = "JMODEL_MAPPER";
+	JMODEL_MAPPER {
+		public String toString() {
+			return "JMODEL_MAPPER";
+		}
+	},
 
 	// Persistence
-	public static final String MYBATIS_PERSISTER = "MYBATIS_PERSISTER";
+	MYBATIS_PERSISTER {
+		public String toString() {
+			return "MYBATIS_PERSISTER";
+		}
+	},
 
 	// Search
-	public static final String ES5_REST_SEARCHER = "ES5_REST_SEARCHER";
-	public static final String ES5_HOST = "ES5_HOST";
+	ES5_REST_SEARCHER {
+		public String toString() {
+			return "ES5_REST_SEARCHER";
+		}
+	},
+	ES5_HOST {
+		public String toString() {
+			return "ES5_HOST";
+		}
+	},
 
 	// Validation
-	public static final String MODEL_VALIDATOR = "MODEL_VALIDATOR";
+	MODEL_VALIDATOR {
+		public String toString() {
+			return "MODEL_VALIDATOR";
+		}
+	}
 
 }

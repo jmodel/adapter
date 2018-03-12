@@ -3,6 +3,7 @@ package com.github.jmodel.adapter;
 import java.util.Map;
 
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.mapping.MapperAdapter;
 import com.github.jmodel.adapter.api.mapping.MapperAdapterFactoryService;
 
@@ -32,17 +33,17 @@ public final class Mapper extends Facade {
 		return getMapper(null);
 	}
 
-	public static Mapper getMapper(String name) {
-		String mapperAdapterId = getAdapterId(AdapterTerms.MAPPER, name);
-		Mapper mapper = facadeManager.getFacade(mapperAdapterId);
+	public static Mapper getMapper(Term t) {
+		String mapperAdapterId = getAdapterId(AdapterTerms.MAPPER, t);
+		Mapper mapper = fm.getFacade(mapperAdapterId);
 		if (mapper != null) {
 			return mapper;
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (mapper == null) {
 				mapper = new Mapper(mapperAdapterId, _mapper_sp.getAdapter(mapperAdapterId));
-				facadeManager.addFacade(mapper);
+				fm.addFacade(mapper);
 			}
 			return mapper;
 		}

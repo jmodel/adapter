@@ -19,7 +19,7 @@ public class IntegratorAdapterFactoryImpl implements IntegratorAdapterFactory {
 
 	public IntegratorAdapterFactoryImpl() {
 		map = new TreeMap<String, IntegratorAdapter>();
-		map.put(AdapterImplTerms.INTEGRATION_CLIENT, new IntegratorAdapterImpl());
+		map.put(AdapterImplTerms.INTEGRATION_CLIENT.toString(), new IntegratorAdapterImpl());
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class CacherAdapterFactoryImpl implements CacherAdapterFactory {
 
 	public CacherAdapterFactoryImpl() {
 		map = new TreeMap<String, CacherAdapter>();
-		map.put(AdapterImplTerms.JCS_CACHER, new JCSCacherAdapter());
+		map.put(AdapterImplTerms.JCS_CACHER.toString(), new JCSCacherAdapter());
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.github.jmodel.adapter;
 import java.util.function.Supplier;
 
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
 import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
@@ -29,6 +30,7 @@ import com.github.jmodel.adapter.api.log.LoggerWrapper;
  * (delayed execution) to get message.
  * 
  * @author jianni@hotmail.com
+ * @see com.github.jmodel.adapter.api.Facade
  *
  */
 public final class Logger extends Facade {
@@ -92,17 +94,17 @@ public final class Logger extends Facade {
 	 *            A name for the logger
 	 * @return a suitable Logger
 	 */
-	public static Logger getLogger(String term, String name) {
-		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, term);
-		Logger logger = facadeManager.getFacade(loggerAdapterId);
+	public static Logger getLogger(Term t, String name) {
+		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, t);
+		Logger logger = fm.getFacade(loggerAdapterId);
 		if (logger != null) {
 			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (logger == null) {
 				logger = new Logger(loggerAdapterId, _logger_sp.getAdapter(loggerAdapterId));
-				facadeManager.addFacade(logger);
+				fm.addFacade(logger);
 			}
 			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
 		}

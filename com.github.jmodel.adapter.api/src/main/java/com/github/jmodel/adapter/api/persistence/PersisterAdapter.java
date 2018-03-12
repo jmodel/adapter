@@ -14,7 +14,7 @@ public abstract class PersisterAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.PERSISTER;
+		return AdapterTerms.PERSISTER.toString();
 	}
 
 	public abstract <S, T> Long insert(S session, Action<?, ?, ?> action, String json, Class<T> clz)

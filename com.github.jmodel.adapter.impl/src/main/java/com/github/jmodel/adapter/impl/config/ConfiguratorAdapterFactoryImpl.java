@@ -19,7 +19,7 @@ public class ConfiguratorAdapterFactoryImpl implements ConfiguratorAdapterFactor
 
 	public ConfiguratorAdapterFactoryImpl() {
 		map = new TreeMap<String, ConfiguratorAdapter<?>>();
-		map.put(AdapterImplTerms.LFS_CONFIGURATOR, new LocalFSConfiguratorAdapter());
+		map.put(AdapterImplTerms.LFS_CONFIGURATOR.toString(), new LocalFSConfiguratorAdapter());
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class MapperAdapterFactoryImpl implements MapperAdapterFactory {
 
 	public MapperAdapterFactoryImpl() {
 		map = new TreeMap<String, MapperAdapter>();
-		map.put(AdapterImplTerms.JMODEL_MAPPER, new MapperAdapterImpl());
+		map.put(AdapterImplTerms.JMODEL_MAPPER.toString(), new MapperAdapterImpl());
 	}
 
 	@Override

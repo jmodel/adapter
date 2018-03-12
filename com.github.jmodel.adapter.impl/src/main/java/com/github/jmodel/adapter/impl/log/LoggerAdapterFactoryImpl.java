@@ -19,7 +19,7 @@ public class LoggerAdapterFactoryImpl implements LoggerAdapterFactory {
 
 	public LoggerAdapterFactoryImpl() {
 		map = new TreeMap<String, LoggerAdapter>();
-		map.put(AdapterImplTerms.JDK_LOGGER, new JDKLoggerAdapter());
+		map.put(AdapterImplTerms.JDK_LOGGER.toString(), new JDKLoggerAdapter());
 	}
 
 	@Override

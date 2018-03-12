@@ -19,7 +19,7 @@ public class ValidatorAdapterFactoryImpl implements ValidatorAdapterFactory {
 
 	public ValidatorAdapterFactoryImpl() {
 		map = new TreeMap<String, ValidatorAdapter>();
-		map.put(AdapterImplTerms.MODEL_VALIDATOR, new ValidatorAdapterImpl());
+		map.put(AdapterImplTerms.MODEL_VALIDATOR.toString(), new ValidatorAdapterImpl());
 	}
 
 	@Override

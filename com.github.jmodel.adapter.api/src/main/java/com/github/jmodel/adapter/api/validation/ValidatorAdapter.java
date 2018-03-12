@@ -14,7 +14,7 @@ public abstract class ValidatorAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.VALIDATOR;
+		return AdapterTerms.VALIDATOR.toString();
 	}
 
 	//

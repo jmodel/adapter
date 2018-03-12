@@ -23,6 +23,6 @@ public abstract class Adapter implements Configurable {
 
 	@Override
 	public String getRegionId() {
-		return AdapterTerms.ADAPTER;
+		return AdapterTerms.ADAPTER.toString();
 	}
 }

@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter;
 
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
 import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
 
@@ -10,7 +11,6 @@ import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
  * 
  * @author jianni@hotmail.com
  * @see com.github.jmodel.adapter.api.Facade
- * @see com.github.jmodel.adapter.Logger
  *
  */
 public final class Cacher extends Facade {
@@ -36,17 +36,17 @@ public final class Cacher extends Facade {
 		return getCacher(null);
 	}
 
-	public static Cacher getCacher(String name) {
-		String cacherAdapterId = getAdapterId(AdapterTerms.CACHER, name);
-		Cacher cacher = facadeManager.getFacade(cacherAdapterId);
+	public static Cacher getCacher(Term t) {
+		String cacherAdapterId = getAdapterId(AdapterTerms.CACHER, t);
+		Cacher cacher = fm.getFacade(cacherAdapterId);
 		if (cacher != null) {
 			return cacher;
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (cacher == null) {
 				cacher = new Cacher(cacherAdapterId, _cacher_sp.getAdapter(cacherAdapterId));
-				facadeManager.addFacade(cacher);
+				fm.addFacade(cacher);
 			}
 			return cacher;
 		}

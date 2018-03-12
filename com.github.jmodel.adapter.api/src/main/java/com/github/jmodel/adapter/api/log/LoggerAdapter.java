@@ -14,7 +14,7 @@ public abstract class LoggerAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.LOGGER;
+		return AdapterTerms.LOGGER.toString();
 	}
 
 	public abstract LoggerWrapper<?> getLoggerWrapper(String clzName);

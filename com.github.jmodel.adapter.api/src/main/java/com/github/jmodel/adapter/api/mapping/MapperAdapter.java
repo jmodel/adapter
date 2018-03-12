@@ -16,7 +16,7 @@ public abstract class MapperAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.MAPPER;
+		return AdapterTerms.MAPPER.toString();
 	}
 
 	public abstract <T> T convert(Object sourceObj, String mappingURI, Map<String, Object> argsMap, Class<T> valueType)

@@ -4,23 +4,59 @@ import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.config.ConfigurationAware;
 
 /**
- * Adapter facade.
+ * Facade is one of the most important concept in adapter package. It aims at
+ * providing a set of simple interface of some common features (implemented by
+ * adapter) for business logic coder. The common features include:
+ * <ul>
+ * <li>Cache</li>
+ * <li>Log</li>
+ * <li>Model Mapping</li>
+ * <li>DB Persistence</li>
+ * <li>Search</li>
+ * <li>Validation</li>
+ * <li>etc. (extensible)</li>
+ * </ul>
+ * <p>
+ * Using facade concept can bring the following benefits:
+ * <ul>
+ * <li>Common features can be handed over to specific experts</li>
+ * <li>Business logic coder can focus on application domain really</li>
+ * <li>The implementation of common features can be managed independently</li>
+ * <li>Application has good portability</li>
+ * </ul>
  * 
  * @author jianni@hotmail.com
+ * @see com.github.jmodel.adapter.api.config.ConfigurationAware
+ * @see com.github.jmodel.adapter.api.TermAware
  *
  */
-public abstract class Facade implements ConfigurationAware {
+public abstract class Facade implements ConfigurationAware, TermAware {
 
-	protected final static FacadeManager facadeManager = FacadeManager.getFacadeManager();
+	/**
+	 * Facade manager is a single instance, used to manage facade instance.
+	 */
+	protected final static FacadeManager fm = FacadeManager.getFacadeManager();
 
+	/**
+	 * Id of facade instance.
+	 */
 	protected String id;
 
 	protected String getId() {
 		return id;
 	}
 
-	protected static String getAdapterId(String adapterTypeName, String adapterName) {
-		return (adapterName == null ? cm.getItemValue(AdapterTerms.ADAPTER, adapterTypeName)
-				: cm.getItemValue(AdapterTerms.ADAPTER, adapterTypeName, adapterName));
+	/**
+	 * Get adapter id from configuration.
+	 * 
+	 * @param adapterTypeTerm
+	 *            The term of adapter type
+	 * @param adapterTerm
+	 *            The term of specific adapter
+	 * @return adapter id
+	 */
+	protected final static String getAdapterId(Term adapterTypeTerm, Term adapterTerm) {
+		return (adapterTerm == null ? cm.getItemValue(AdapterTerms.ADAPTER.toString(), adapterTypeTerm.toString())
+				: cm.getItemValue(AdapterTerms.ADAPTER.toString(), adapterTypeTerm.toString(), adapterTerm.toString()));
 	}
 }

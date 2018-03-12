@@ -13,7 +13,7 @@ public abstract class IntegratorAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.INTEGRATOR;
+		return AdapterTerms.INTEGRATOR.toString();
 	}
 
 	public abstract void dispatch();

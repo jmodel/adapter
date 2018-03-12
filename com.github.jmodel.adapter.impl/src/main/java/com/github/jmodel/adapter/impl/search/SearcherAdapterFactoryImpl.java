@@ -19,7 +19,7 @@ public class SearcherAdapterFactoryImpl implements SearcherAdapterFactory {
 
 	public SearcherAdapterFactoryImpl() {
 		map = new TreeMap<String, SearcherAdapter>();
-		map.put(AdapterImplTerms.ES5_REST_SEARCHER, new ES5RestSearchAdapter());
+		map.put(AdapterImplTerms.ES5_REST_SEARCHER.toString(), new ES5RestSearchAdapter());
 	}
 
 	@Override

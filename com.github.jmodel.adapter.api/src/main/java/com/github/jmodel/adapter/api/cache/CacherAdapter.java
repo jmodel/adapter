@@ -13,7 +13,7 @@ public abstract class CacherAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.CACHER;
+		return AdapterTerms.CACHER.toString();
 	}
 
 	//

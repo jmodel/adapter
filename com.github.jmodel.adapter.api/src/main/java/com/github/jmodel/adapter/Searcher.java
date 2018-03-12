@@ -2,6 +2,7 @@ package com.github.jmodel.adapter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
 import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
 
@@ -31,17 +32,17 @@ public final class Searcher extends Facade {
 		return getSearcher(null);
 	}
 
-	public static Searcher getSearcher(String name) {
-		String searcherAdapterId = getAdapterId(AdapterTerms.SEARCHER, name);
-		Searcher searcher = facadeManager.getFacade(searcherAdapterId);
+	public static Searcher getSearcher(Term t) {
+		String searcherAdapterId = getAdapterId(AdapterTerms.SEARCHER, t);
+		Searcher searcher = fm.getFacade(searcherAdapterId);
 		if (searcher != null) {
 			return searcher;
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (searcher == null) {
 				searcher = new Searcher(searcherAdapterId, _searcher_sp.getAdapter(searcherAdapterId));
-				facadeManager.addFacade(searcher);
+				fm.addFacade(searcher);
 			}
 			return searcher;
 		}

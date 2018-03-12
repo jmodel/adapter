@@ -14,7 +14,7 @@ public abstract class SearcherAdapter extends Adapter {
 
 	@Override
 	public String getItemId() {
-		return AdapterTerms.SEARCHER;
+		return AdapterTerms.SEARCHER.toString();
 	}
 
 	//

@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter;
 
 import com.github.jmodel.adapter.api.Facade;
+import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
 
@@ -30,17 +31,17 @@ public final class Validator extends Facade {
 		return getValidator(null);
 	}
 
-	public static Validator getValidator(String name) {
-		String validatorAdapterId = getAdapterId(AdapterTerms.VALIDATOR, name);
-		Validator validator = facadeManager.getFacade(validatorAdapterId);
+	public static Validator getValidator(Term t) {
+		String validatorAdapterId = getAdapterId(AdapterTerms.VALIDATOR, t);
+		Validator validator = fm.getFacade(validatorAdapterId);
 		if (validator != null) {
 			return validator;
 		}
 
-		synchronized (facadeManager) {
+		synchronized (fm) {
 			if (validator == null) {
 				validator = new Validator(validatorAdapterId, _validator_sp.getAdapter(validatorAdapterId));
-				facadeManager.addFacade(validator);
+				fm.addFacade(validator);
 			}
 			return validator;
 		}

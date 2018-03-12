@@ -41,6 +41,9 @@ public final class FacadeManager {
 	}
 
 	public synchronized void addFacade(Facade facade) {
+		if (!(facade instanceof TermAware)) {
+			throw new TermAwareException("Facade id: " + facade.getId());
+		}
 		facadeMap.put(facade.getId(), facade);
 	}
 }

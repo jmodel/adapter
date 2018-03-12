@@ -19,7 +19,7 @@ public class PersisterAdapterFactoryImpl implements PersisterAdapterFactory {
 
 	public PersisterAdapterFactoryImpl() {
 		map = new TreeMap<String, PersisterAdapter>();
-		map.put(AdapterImplTerms.MYBATIS_PERSISTER, new PersisterAdapterImpl());
+		map.put(AdapterImplTerms.MYBATIS_PERSISTER.toString(), new PersisterAdapterImpl());
 	}
 
 	@Override

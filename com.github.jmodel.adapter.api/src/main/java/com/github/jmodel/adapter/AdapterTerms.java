@@ -1,19 +1,62 @@
 package com.github.jmodel.adapter;
 
-public interface AdapterTerms {
+import com.github.jmodel.adapter.api.Term;
 
-	// Adapter
-	public static final String ADAPTER = "Adapter";
+/**
+ * 
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
+public enum AdapterTerms implements Term {
 
-	public static final String CACHER = "CacherAdapter";
-	public static final String INTEGRATOR = "IntegratorAdapter";
-	public static final String LOGGER = "LoggerAdapter";
-	public static final String MAPPER = "MapperAdapter";
-	public static final String PERSISTER = "PersisterAdapter";
+	ADAPTER {
+		public String toString() {
+			return "Adapter";
+		}
+	},
+
+	CACHER {
+		public String toString() {
+			return "CacherAdapter";
+		}
+	},
+
+	INTEGRATOR {
+		public String toString() {
+			return "IntegratorAdapter";
+		}
+	},
+
+	LOGGER {
+		public String toString() {
+			return "LoggerAdapter";
+		}
+	},
+
+	MAPPER {
+		public String toString() {
+			return "MapperAdapter";
+		}
+	},
+
+	PERSISTER {
+		public String toString() {
+			return "PersisterAdapter";
+		}
+	},
 
 	// Searcher Adapter
-	public static final String SEARCHER = "SearcherAdapter";
+	SEARCHER {
+		public String toString() {
+			return "SearcherAdapter";
+		}
+	},
 
-	public static final String VALIDATOR = "ValidatorAdapter";
+	VALIDATOR {
+		public String toString() {
+			return "ValidatorAdapter";
+		}
+	}
 
 }
