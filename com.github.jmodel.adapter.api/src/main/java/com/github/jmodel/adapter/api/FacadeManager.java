@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public final class FacadeManager {
 
-	private Map<String, Facade> facadeMap = new HashMap<String, Facade>();
+	private Map<Adapter, Facade<?>> facadeMap = new HashMap<Adapter, Facade<?>>();
 
 	private static FacadeManager facadeManager;
 
@@ -36,14 +36,11 @@ public final class FacadeManager {
 	//
 
 	@SuppressWarnings("unchecked")
-	public <T> T getFacade(String id) {
-		return (T) facadeMap.get(id);
+	public <T> T getFacade(Adapter adapter) {
+		return (T) facadeMap.get(adapter);
 	}
 
-	public synchronized void addFacade(Facade facade) {
-		if (!(facade instanceof TermAware)) {
-			throw new TermAwareException("Facade id: " + facade.getId());
-		}
-		facadeMap.put(facade.getId(), facade);
+	public synchronized void addFacade(Facade<?> facade) {
+		facadeMap.put(facade.getAdapter(), facade);
 	}
 }

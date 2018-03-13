@@ -1,9 +1,9 @@
 package com.github.jmodel.adapter;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
 import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Public API for validation.
@@ -11,18 +11,12 @@ import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
  * @author jianni@hotmail.com
  *
  */
-public final class Validator extends Facade {
+public final class Validator extends Facade<ValidatorAdapter> {
 
 	private final static ValidatorAdapterFactoryService _validator_sp = ValidatorAdapterFactoryService.getInstance();
 
-	private ValidatorAdapter validatorAdapter;
-
-	private Validator(String id, ValidatorAdapter validatorAdapter) {
-		if (validatorAdapter == null) {
-			throw new RuntimeException("Validator adapter is not found.");
-		}
-		this.id = id;
-		this.validatorAdapter = validatorAdapter;
+	private Validator(ValidatorAdapter validatorAdapter) {
+		this.adapter = validatorAdapter;
 	}
 
 	//
@@ -31,16 +25,18 @@ public final class Validator extends Facade {
 		return getValidator(null);
 	}
 
-	public static Validator getValidator(Term t) {
-		String validatorAdapterId = getAdapterId(AdapterTerms.VALIDATOR, t);
-		Validator validator = fm.getFacade(validatorAdapterId);
+	public static Validator getValidator(Term adapterTerm) {
+		ValidatorAdapter validatorAdapter = _validator_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.VALIDATOR_ADAPTER), adapterTerm));
+
+		Validator validator = fm.getFacade(validatorAdapter);
 		if (validator != null) {
 			return validator;
 		}
 
 		synchronized (fm) {
 			if (validator == null) {
-				validator = new Validator(validatorAdapterId, _validator_sp.getAdapter(validatorAdapterId));
+				validator = new Validator(validatorAdapter);
 				fm.addFacade(validator);
 			}
 			return validator;
@@ -50,7 +46,7 @@ public final class Validator extends Facade {
 	//
 
 	public <T> void check(T object, String validationName) throws AdapterException {
-		validatorAdapter.check(object, validationName);
+		adapter.check(object, validationName);
 	}
 
 }

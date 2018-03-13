@@ -2,9 +2,9 @@ package com.github.jmodel.adapter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.search.SearcherAdapter;
 import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Public API for search.
@@ -12,18 +12,12 @@ import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
  * @author jianni@hotmail.com
  *
  */
-public final class Searcher extends Facade {
+public final class Searcher extends Facade<SearcherAdapter> {
 
 	private final static SearcherAdapterFactoryService _searcher_sp = SearcherAdapterFactoryService.getInstance();
 
-	private SearcherAdapter searcherAdapter;
-
-	private Searcher(String id, SearcherAdapter searcherAdapter) {
-		if (searcherAdapter == null) {
-			throw new RuntimeException("Searcher adapter is not found.");
-		}
-		this.id = id;
-		this.searcherAdapter = searcherAdapter;
+	private Searcher(SearcherAdapter searcherAdapter) {
+		this.adapter = searcherAdapter;
 	}
 
 	//
@@ -32,16 +26,16 @@ public final class Searcher extends Facade {
 		return getSearcher(null);
 	}
 
-	public static Searcher getSearcher(Term t) {
-		String searcherAdapterId = getAdapterId(AdapterTerms.SEARCHER, t);
-		Searcher searcher = fm.getFacade(searcherAdapterId);
+	public static Searcher getSearcher(Term adapterTerm) {
+		SearcherAdapter searcherAdapter = _searcher_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.SEARCHER_ADAPTER), adapterTerm));
+		Searcher searcher = fm.getFacade(searcherAdapter);
 		if (searcher != null) {
 			return searcher;
 		}
-
 		synchronized (fm) {
 			if (searcher == null) {
-				searcher = new Searcher(searcherAdapterId, _searcher_sp.getAdapter(searcherAdapterId));
+				searcher = new Searcher(searcherAdapter);
 				fm.addFacade(searcher);
 			}
 			return searcher;
@@ -51,11 +45,11 @@ public final class Searcher extends Facade {
 	//
 
 	public void index(String index, String doc) throws AdapterException {
-		searcherAdapter.index(index, doc);
+		adapter.index(index, doc);
 	}
 
 	public String search(String index, String query) throws AdapterException {
-		return searcherAdapter.search(index, query);
+		return adapter.search(index, query);
 	}
 
 	public Long count(final String indexName, final String json) {

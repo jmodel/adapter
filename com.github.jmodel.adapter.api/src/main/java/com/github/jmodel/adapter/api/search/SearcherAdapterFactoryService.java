@@ -28,14 +28,14 @@ public class SearcherAdapterFactoryService {
 		return service;
 	}
 
-	public SearcherAdapter getAdapter(String searcherAdapterId) {
+	public SearcherAdapter getAdapter(String text) {
 
 		SearcherAdapter searcherAdapter = null;
 
 		Iterator<SearcherAdapterFactory> searcherAdapterFactorys = loader.iterator();
 		while (searcherAdapter == null && searcherAdapterFactorys.hasNext()) {
 			SearcherAdapterFactory searcherAdapterFactory = searcherAdapterFactorys.next();
-			searcherAdapter = searcherAdapterFactory.getAdapter(searcherAdapterId);
+			searcherAdapter = searcherAdapterFactory.getAdapter(text);
 		}
 		return searcherAdapter;
 	}

@@ -2,6 +2,7 @@ package com.github.jmodel.adapter.api.integration;
 
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Integrator adapter
@@ -12,9 +13,11 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class IntegratorAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.INTEGRATOR.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.INTEGRATOR_ADAPTER);
 	}
+
+	//
 
 	public abstract void dispatch();
 }

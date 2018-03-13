@@ -1,9 +1,9 @@
 package com.github.jmodel.adapter;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
 import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Simple cache facade.
@@ -13,21 +13,15 @@ import com.github.jmodel.adapter.api.cache.CacherAdapterFactoryService;
  * @see com.github.jmodel.adapter.api.Facade
  *
  */
-public final class Cacher extends Facade {
+public final class Cacher extends Facade<CacherAdapter> {
 
 	/**
 	 * Cacher adapter factory service
 	 */
 	private final static CacherAdapterFactoryService _cacher_sp = CacherAdapterFactoryService.getInstance();
 
-	private CacherAdapter cacherAdapter;
-
-	private Cacher(String id, CacherAdapter cacherAdapter) {
-		if (cacherAdapter == null) {
-			throw new RuntimeException("Cacher adapter is not found.");
-		}
-		this.id = id;
-		this.cacherAdapter = cacherAdapter;
+	private Cacher(CacherAdapter cacherAdapter) {
+		this.adapter = cacherAdapter;
 	}
 
 	//
@@ -36,16 +30,17 @@ public final class Cacher extends Facade {
 		return getCacher(null);
 	}
 
-	public static Cacher getCacher(Term t) {
-		String cacherAdapterId = getAdapterId(AdapterTerms.CACHER, t);
-		Cacher cacher = fm.getFacade(cacherAdapterId);
+	public static Cacher getCacher(Term adapterTerm) {
+		CacherAdapter cacherAdapter = _cacher_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.CACHER_ADAPTER), adapterTerm));
+		Cacher cacher = fm.getFacade(cacherAdapter);
 		if (cacher != null) {
 			return cacher;
 		}
 
 		synchronized (fm) {
 			if (cacher == null) {
-				cacher = new Cacher(cacherAdapterId, _cacher_sp.getAdapter(cacherAdapterId));
+				cacher = new Cacher(cacherAdapter);
 				fm.addFacade(cacher);
 			}
 			return cacher;
@@ -55,11 +50,11 @@ public final class Cacher extends Facade {
 	//
 
 	public <T> T get(String region, String key) {
-		return cacherAdapter.get(region, key);
+		return adapter.get(region, key);
 	}
 
 	public <T> void put(String region, String key, T value) {
-		cacherAdapter.put(region, key, value);
+		adapter.put(region, key, value);
 	}
 
 }

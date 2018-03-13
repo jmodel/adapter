@@ -1,7 +1,6 @@
 package com.github.jmodel.adapter.impl.cache;
 
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
 import com.github.jmodel.adapter.impl.AdapterImplTerms;
@@ -13,18 +12,10 @@ import com.github.jmodel.adapter.spi.cache.CacherAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class CacherAdapterFactoryImpl implements CacherAdapterFactory {
-
-	private SortedMap<String, CacherAdapter> map;
-
-	public CacherAdapterFactoryImpl() {
-		map = new TreeMap<String, CacherAdapter>();
-		map.put(AdapterImplTerms.JCS_CACHER.toString(), new JCSCacherAdapter());
-	}
+public class CacherAdapterFactoryImpl extends CacherAdapterFactory {
 
 	@Override
-	public CacherAdapter getAdapter(String adapterId) {
-		return map.get(adapterId);
+	protected void createCacherAdapters(SortedMap<String, CacherAdapter> map) {
+		map.put(AdapterImplTerms.JCS_CACHER, new JCSCacherAdapter());
 	}
-
 }

@@ -28,14 +28,14 @@ public class IntegratorAdapterFactoryService {
 		return service;
 	}
 
-	public IntegratorAdapter getAdapter(String integratorAdapterId) {
+	public IntegratorAdapter getAdapter(String text) {
 
 		IntegratorAdapter integratorAdapter = null;
 
 		Iterator<IntegratorAdapterFactory> integratorAdapterFactorys = loader.iterator();
 		while (integratorAdapter == null && integratorAdapterFactorys.hasNext()) {
 			IntegratorAdapterFactory integratorAdapterFactory = integratorAdapterFactorys.next();
-			integratorAdapter = integratorAdapterFactory.getAdapter(integratorAdapterId);
+			integratorAdapter = integratorAdapterFactory.getAdapter(text);
 		}
 		return integratorAdapter;
 	}

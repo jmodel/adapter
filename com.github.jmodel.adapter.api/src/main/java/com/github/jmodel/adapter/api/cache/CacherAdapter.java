@@ -2,6 +2,7 @@ package com.github.jmodel.adapter.api.cache;
 
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Cacher adapter
@@ -12,8 +13,8 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class CacherAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.CACHER.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.CACHER_ADAPTER);
 	}
 
 	//

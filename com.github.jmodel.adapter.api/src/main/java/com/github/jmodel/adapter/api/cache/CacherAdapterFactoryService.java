@@ -28,14 +28,13 @@ public class CacherAdapterFactoryService {
 		return service;
 	}
 
-	public CacherAdapter getAdapter(String cacherAdapterId) {
+	public CacherAdapter getAdapter(String text) {
 
 		CacherAdapter cacherAdapter = null;
-
 		Iterator<CacherAdapterFactory> cacherAdapterFactorys = loader.iterator();
 		while (cacherAdapter == null && cacherAdapterFactorys.hasNext()) {
 			CacherAdapterFactory cacherAdapterFactory = cacherAdapterFactorys.next();
-			cacherAdapter = cacherAdapterFactory.getAdapter(cacherAdapterId);
+			cacherAdapter = cacherAdapterFactory.getAdapter(text);
 		}
 		return cacherAdapter;
 	}

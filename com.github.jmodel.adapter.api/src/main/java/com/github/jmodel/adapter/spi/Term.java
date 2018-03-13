@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter.api;
+package com.github.jmodel.adapter.spi;
 
 /**
  * Term is another important concept as Facade. Whatever you want to do, a
@@ -15,6 +15,27 @@ package com.github.jmodel.adapter.api;
  * @author jianni@hotmail.com
  *
  */
-public interface Term {
+public final class Term {
+
+	private String text;
+
+	/**
+	 * Term object is restricted to be created by TeamFactory.
+	 * 
+	 * @param text
+	 *            term text
+	 */
+	Term(String text) {
+		this.text = text;
+	}
+
+	/**
+	 * Get term text
+	 * 
+	 * @return term text
+	 */
+	public String getText() {
+		return text;
+	}
 
 }

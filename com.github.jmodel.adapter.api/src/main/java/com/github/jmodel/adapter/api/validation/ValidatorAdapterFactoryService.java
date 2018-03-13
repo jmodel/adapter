@@ -28,14 +28,14 @@ public class ValidatorAdapterFactoryService {
 		return service;
 	}
 
-	public ValidatorAdapter getAdapter(String validatorAdapterId) {
+	public ValidatorAdapter getAdapter(String text) {
 
 		ValidatorAdapter validatorAdapter = null;
 
 		Iterator<ValidatorAdapterFactory> validatorAdapterFactorys = loader.iterator();
 		while (validatorAdapter == null && validatorAdapterFactorys.hasNext()) {
 			ValidatorAdapterFactory validatorAdapterFactory = validatorAdapterFactorys.next();
-			validatorAdapter = validatorAdapterFactory.getAdapter(validatorAdapterId);
+			validatorAdapter = validatorAdapterFactory.getAdapter(text);
 		}
 		return validatorAdapter;
 	}

@@ -28,14 +28,14 @@ public class LoggerAdapterFactoryService {
 		return service;
 	}
 
-	public LoggerAdapter getAdapter(String loggerAdapterId) {
+	public LoggerAdapter getAdapter(String text) {
 
 		LoggerAdapter loggerAdapter = null;
 
 		Iterator<LoggerAdapterFactory> loggerAdapterFactorys = loader.iterator();
 		while (loggerAdapter == null && loggerAdapterFactorys.hasNext()) {
 			LoggerAdapterFactory loggerAdapterFactory = loggerAdapterFactorys.next();
-			loggerAdapter = loggerAdapterFactory.getAdapter(loggerAdapterId);
+			loggerAdapter = loggerAdapterFactory.getAdapter(text);
 		}
 		return loggerAdapter;
 	}

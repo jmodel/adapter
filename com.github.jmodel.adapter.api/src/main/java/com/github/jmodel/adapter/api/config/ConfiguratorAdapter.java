@@ -1,6 +1,7 @@
 package com.github.jmodel.adapter.api.config;
 
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Configurator adapter
@@ -14,7 +15,7 @@ public abstract class ConfiguratorAdapter<T> extends Adapter {
 	 * 
 	 */
 	@Override
-	public String getItemId() {
+	public Term getItemTerm() {
 		// configurator adapter is not defined in config
 		return null;
 	}

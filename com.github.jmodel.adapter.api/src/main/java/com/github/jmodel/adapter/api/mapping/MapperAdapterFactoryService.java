@@ -28,14 +28,14 @@ public class MapperAdapterFactoryService {
 		return service;
 	}
 
-	public MapperAdapter getAdapter(String mapperAdapterId) {
+	public MapperAdapter getAdapter(String text) {
 
 		MapperAdapter mapperAdapter = null;
 
 		Iterator<MapperAdapterFactory> mapperAdapterFactorys = loader.iterator();
 		while (mapperAdapter == null && mapperAdapterFactorys.hasNext()) {
 			MapperAdapterFactory mapperAdapterFactory = mapperAdapterFactorys.next();
-			mapperAdapter = mapperAdapterFactory.getAdapter(mapperAdapterId);
+			mapperAdapter = mapperAdapterFactory.getAdapter(text);
 		}
 		return mapperAdapter;
 	}

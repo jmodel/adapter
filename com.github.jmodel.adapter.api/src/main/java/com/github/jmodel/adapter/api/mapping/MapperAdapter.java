@@ -5,6 +5,7 @@ import java.util.Map;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Mapper adatper
@@ -15,9 +16,11 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class MapperAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.MAPPER.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.MAPPER_ADAPTER);
 	}
+
+	//
 
 	public abstract <T> T convert(Object sourceObj, String mappingURI, Map<String, Object> argsMap, Class<T> valueType)
 			throws AdapterException;

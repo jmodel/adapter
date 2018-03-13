@@ -1,6 +1,10 @@
 package com.github.jmodel.adapter.spi.integration;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
+import com.github.jmodel.adapter.spi.AdapterFactory;
 
 /**
  * Integrator adapter factory interface.
@@ -8,8 +12,12 @@ import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
  * @author jianni@hotmail.com
  *
  */
-public interface IntegratorAdapterFactory {
+public abstract class IntegratorAdapterFactory extends AdapterFactory<IntegratorAdapter> {
 
-	public IntegratorAdapter getAdapter(String integratorAdapterId);
+	protected final void init() {
+		map = new TreeMap<String, IntegratorAdapter>();
+		createIntegratorAdapters(map);
+	}
 
+	protected abstract void createIntegratorAdapters(SortedMap<String, IntegratorAdapter> map);
 }

@@ -3,10 +3,10 @@ package com.github.jmodel.adapter;
 import java.util.List;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.persistence.Action;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
 import com.github.jmodel.adapter.api.persistence.PersisterAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Public API for persistence.
@@ -14,18 +14,12 @@ import com.github.jmodel.adapter.api.persistence.PersisterAdapterFactoryService;
  * @author jianni@hotmail.com
  *
  */
-public final class Persister extends Facade {
+public final class Persister extends Facade<PersisterAdapter> {
 
 	private final static PersisterAdapterFactoryService _persister_sp = PersisterAdapterFactoryService.getInstance();
 
-	private PersisterAdapter persisterAdapter;
-
-	private Persister(String id, PersisterAdapter persisterAdapter) {
-		if (persisterAdapter == null) {
-			throw new RuntimeException("Persister adapter is not found.");
-		}
-		this.id = id;
-		this.persisterAdapter = persisterAdapter;
+	private Persister(PersisterAdapter persisterAdapter) {
+		this.adapter = persisterAdapter;
 	}
 
 	//
@@ -34,16 +28,17 @@ public final class Persister extends Facade {
 		return getPersister(null);
 	}
 
-	public static Persister getPersister(Term t) {
-		String persisterAdapterId = getAdapterId(AdapterTerms.PERSISTER, t);
-		Persister persister = fm.getFacade(persisterAdapterId);
+	public static Persister getPersister(Term adapterTerm) {
+		PersisterAdapter persisterAdapter = _persister_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.PERSISTER_ADAPTER), adapterTerm));
+		Persister persister = fm.getFacade(persisterAdapter);
 		if (persister != null) {
 			return persister;
 		}
 
 		synchronized (fm) {
 			if (persister == null) {
-				persister = new Persister(persisterAdapterId, _persister_sp.getAdapter(persisterAdapterId));
+				persister = new Persister(persisterAdapter);
 				fm.addFacade(persister);
 			}
 			return persister;
@@ -52,11 +47,11 @@ public final class Persister extends Facade {
 
 	public <S, T> Long insert(S session, Action<?, ?, ?> action, String json, Class<T> valueType)
 			throws AdapterException {
-		return persisterAdapter.insert(session, action, json, valueType);
+		return adapter.insert(session, action, json, valueType);
 	}
 
 	public <S> Long insertObject(S session, Action<?, ?, ?> action, Object obj) throws AdapterException {
-		return persisterAdapter.insertObject(session, action, obj);
+		return adapter.insertObject(session, action, obj);
 	}
 
 	public Long update(final String persistenceName, final Long id, final String json, final String... args)

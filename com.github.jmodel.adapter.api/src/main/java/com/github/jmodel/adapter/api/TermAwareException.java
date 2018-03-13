@@ -1,7 +1,8 @@
 package com.github.jmodel.adapter.api;
 
 /**
- * Terms is common language of all stakeholders.
+ * Term is common language of specified stakeholders. If talk with each other in
+ * strange language, TermAwareException will be thrown.
  * 
  * @author jianni@hotmail.com
  *

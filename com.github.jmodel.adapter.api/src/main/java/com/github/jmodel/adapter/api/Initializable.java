@@ -16,8 +16,22 @@ public abstract class Initializable implements ConfigurationAware {
 		return inited;
 	}
 
-	protected void setInited(boolean inited) {
+	protected final void setInited(boolean inited) {
 		this.inited = inited;
+	}
+
+	public final void doInit() {
+
+		if (isInited()) {
+			return;
+		}
+
+		synchronized (inited) {
+
+			init();
+
+			setInited(true);
+		}
 	}
 
 	protected abstract void init();

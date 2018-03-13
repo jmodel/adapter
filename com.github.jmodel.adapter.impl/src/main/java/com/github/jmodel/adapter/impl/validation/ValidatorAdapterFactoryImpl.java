@@ -1,7 +1,6 @@
 package com.github.jmodel.adapter.impl.validation;
 
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
 import com.github.jmodel.adapter.impl.AdapterImplTerms;
@@ -13,18 +12,11 @@ import com.github.jmodel.adapter.spi.validation.ValidatorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class ValidatorAdapterFactoryImpl implements ValidatorAdapterFactory {
-
-	private SortedMap<String, ValidatorAdapter> map;
-
-	public ValidatorAdapterFactoryImpl() {
-		map = new TreeMap<String, ValidatorAdapter>();
-		map.put(AdapterImplTerms.MODEL_VALIDATOR.toString(), new ValidatorAdapterImpl());
-	}
+public class ValidatorAdapterFactoryImpl extends ValidatorAdapterFactory {
 
 	@Override
-	public ValidatorAdapter getAdapter(String adapterId) {
-		return map.get(adapterId);
+	protected void createValidatorAdapters(SortedMap<String, ValidatorAdapter> map) {
+		map.put(AdapterImplTerms.MODEL_VALIDATOR, new ValidatorAdapterImpl());
 	}
 
 }

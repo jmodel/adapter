@@ -3,6 +3,7 @@ package com.github.jmodel.adapter.api.validation;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Validator adatper
@@ -13,8 +14,8 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class ValidatorAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.VALIDATOR.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.VALIDATOR_ADAPTER);
 	}
 
 	//

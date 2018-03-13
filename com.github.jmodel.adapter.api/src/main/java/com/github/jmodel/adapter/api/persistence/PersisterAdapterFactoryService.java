@@ -28,14 +28,14 @@ public class PersisterAdapterFactoryService {
 		return service;
 	}
 
-	public PersisterAdapter getAdapter(String persisterAdapterId) {
+	public PersisterAdapter getAdapter(String text) {
 
 		PersisterAdapter persisterAdapter = null;
 
 		Iterator<PersisterAdapterFactory> persisterAdapterFactorys = loader.iterator();
 		while (persisterAdapter == null && persisterAdapterFactorys.hasNext()) {
 			PersisterAdapterFactory persisterAdapterFactory = persisterAdapterFactorys.next();
-			persisterAdapter = persisterAdapterFactory.getAdapter(persisterAdapterId);
+			persisterAdapter = persisterAdapterFactory.getAdapter(text);
 		}
 		return persisterAdapter;
 	}

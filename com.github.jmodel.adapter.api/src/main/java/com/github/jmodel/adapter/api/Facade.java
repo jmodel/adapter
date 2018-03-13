@@ -2,6 +2,7 @@ package com.github.jmodel.adapter.api;
 
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.config.ConfigurationAware;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Facade is one of the most important concept in adapter package. It aims at
@@ -24,39 +25,38 @@ import com.github.jmodel.adapter.api.config.ConfigurationAware;
  * <li>The implementation of common features can be managed independently</li>
  * <li>Application has good portability</li>
  * </ul>
+ * <p>
+ * 
  * 
  * @author jianni@hotmail.com
  * @see com.github.jmodel.adapter.api.config.ConfigurationAware
  * @see com.github.jmodel.adapter.api.TermAware
  *
  */
-public abstract class Facade implements ConfigurationAware, TermAware {
+public abstract class Facade<T extends Adapter> implements ConfigurationAware, TermAware {
 
 	/**
 	 * Facade manager is a single instance, used to manage facade instance.
 	 */
 	protected final static FacadeManager fm = FacadeManager.getFacadeManager();
 
-	/**
-	 * Id of facade instance.
-	 */
-	protected String id;
+	protected T adapter;
 
-	protected String getId() {
-		return id;
+	protected T getAdapter() {
+		return adapter;
 	}
 
 	/**
-	 * Get adapter id from configuration.
+	 * Get adapter implementation term from configuration.
 	 * 
 	 * @param adapterTypeTerm
-	 *            The term of adapter type
+	 *            The term of adapter type, e.g. LoggerAdapter
 	 * @param adapterTerm
-	 *            The term of specific adapter
-	 * @return adapter id
+	 *            The term of specific adapter, e.g. JDKLoggerAdapter
+	 * @return adapter implementation term, e.g. MyJDKLoggerAdapter
 	 */
-	protected final static String getAdapterId(Term adapterTypeTerm, Term adapterTerm) {
-		return (adapterTerm == null ? cm.getItemValue(AdapterTerms.ADAPTER.toString(), adapterTypeTerm.toString())
-				: cm.getItemValue(AdapterTerms.ADAPTER.toString(), adapterTypeTerm.toString(), adapterTerm.toString()));
+	protected final static String getTermText(Term adapterTypeTerm, Term adapterTerm) {
+		return (adapterTerm == null ? cm.getItemValue(AdapterTerms.ADAPTER, adapterTypeTerm.getText())
+				: cm.getItemValue(AdapterTerms.ADAPTER, adapterTypeTerm.getText(), adapterTerm.getText()));
 	}
 }

@@ -1,5 +1,7 @@
 package com.github.jmodel.adapter.api.config;
 
+import com.github.jmodel.adapter.spi.Term;
+
 /**
  * 
  * 
@@ -9,8 +11,8 @@ package com.github.jmodel.adapter.api.config;
  */
 public interface Configurable extends ConfigurationAware {
 
-	public String getRegionId();
+	public Term getRegionTerm();
 
-	public String getItemId();
+	public Term getItemTerm();
 
 }

@@ -1,6 +1,10 @@
 package com.github.jmodel.adapter.spi.cache;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import com.github.jmodel.adapter.api.cache.CacherAdapter;
+import com.github.jmodel.adapter.spi.AdapterFactory;
 
 /**
  * Cacher adapter factory interface.
@@ -8,8 +12,12 @@ import com.github.jmodel.adapter.api.cache.CacherAdapter;
  * @author jianni@hotmail.com
  *
  */
-public interface CacherAdapterFactory {
+public abstract class CacherAdapterFactory extends AdapterFactory<CacherAdapter> {
 
-	public CacherAdapter getAdapter(String cacherAdapterId);
+	protected final void init() {
+		map = new TreeMap<String, CacherAdapter>();
+		createCacherAdapters(map);
+	}
 
+	protected abstract void createCacherAdapters(SortedMap<String, CacherAdapter> map);
 }

@@ -8,4 +8,8 @@ package com.github.jmodel.adapter.api;
  */
 public interface TermAware {
 
+	/**
+	 * TermFactoryService is a single instance.
+	 */
+	public final static TermFactoryService tfs = TermFactoryService.getInstance();
 }

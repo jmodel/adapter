@@ -3,9 +3,9 @@ package com.github.jmodel.adapter;
 import java.io.Serializable;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.integration.IntegratorAdapter;
 import com.github.jmodel.adapter.api.integration.IntegratorAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Public API for integration.
@@ -13,18 +13,12 @@ import com.github.jmodel.adapter.api.integration.IntegratorAdapterFactoryService
  * @author jianni@hotmail.com
  *
  */
-public final class Integrator extends Facade {
+public final class Integrator extends Facade<IntegratorAdapter> {
 
 	private final static IntegratorAdapterFactoryService _integrator_sp = IntegratorAdapterFactoryService.getInstance();
 
-	private IntegratorAdapter integratorAdapter;
-
-	private Integrator(String id, IntegratorAdapter integratorAdapter) {
-		if (integratorAdapter == null) {
-			throw new RuntimeException("Integrator adapter is not found.");
-		}
-		this.id = id;
-		this.integratorAdapter = integratorAdapter;
+	private Integrator(IntegratorAdapter integratorAdapter) {
+		this.adapter = integratorAdapter;
 	}
 
 	//
@@ -33,16 +27,16 @@ public final class Integrator extends Facade {
 		return getIntegrator(null);
 	}
 
-	public static Integrator getIntegrator(Term t) {
-		String integratorAdapterId = getAdapterId(AdapterTerms.INTEGRATOR, t);
-		Integrator integrator = fm.getFacade(integratorAdapterId);
+	public static Integrator getIntegrator(Term adapterTerm) {
+		IntegratorAdapter integratorAdapter = _integrator_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.INTEGRATOR_ADAPTER), adapterTerm));
+		Integrator integrator = fm.getFacade(integratorAdapter);
 		if (integrator != null) {
 			return integrator;
 		}
-
 		synchronized (fm) {
 			if (integrator == null) {
-				integrator = new Integrator(integratorAdapterId, _integrator_sp.getAdapter(integratorAdapterId));
+				integrator = new Integrator(integratorAdapter);
 				fm.addFacade(integrator);
 			}
 			return integrator;
@@ -52,7 +46,7 @@ public final class Integrator extends Facade {
 	//
 
 	public void dispatch(String pointName, Serializable content) {
-		integratorAdapter.dispatch();
+		adapter.dispatch();
 	}
 
 }

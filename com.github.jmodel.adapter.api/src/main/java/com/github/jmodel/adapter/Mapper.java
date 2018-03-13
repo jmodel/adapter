@@ -3,9 +3,9 @@ package com.github.jmodel.adapter;
 import java.util.Map;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.mapping.MapperAdapter;
 import com.github.jmodel.adapter.api.mapping.MapperAdapterFactoryService;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Public API for mapping.
@@ -13,18 +13,12 @@ import com.github.jmodel.adapter.api.mapping.MapperAdapterFactoryService;
  * @author jianni@hotmail.com
  *
  */
-public final class Mapper extends Facade {
+public final class Mapper extends Facade<MapperAdapter> {
 
 	private final static MapperAdapterFactoryService _mapper_sp = MapperAdapterFactoryService.getInstance();
 
-	private MapperAdapter mapperAdapter;
-
-	private Mapper(String id, MapperAdapter mapperAdapter) {
-		if (mapperAdapter == null) {
-			throw new RuntimeException("Mapper adapter is not found.");
-		}
-		this.id = id;
-		this.mapperAdapter = mapperAdapter;
+	private Mapper(MapperAdapter mapperAdapter) {
+		this.adapter = mapperAdapter;
 	}
 
 	//
@@ -33,16 +27,17 @@ public final class Mapper extends Facade {
 		return getMapper(null);
 	}
 
-	public static Mapper getMapper(Term t) {
-		String mapperAdapterId = getAdapterId(AdapterTerms.MAPPER, t);
-		Mapper mapper = fm.getFacade(mapperAdapterId);
+	public static Mapper getMapper(Term adapterTerm) {
+		MapperAdapter mapperAdapter = _mapper_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.MAPPER_ADAPTER), adapterTerm));
+		Mapper mapper = fm.getFacade(mapperAdapter);
 		if (mapper != null) {
 			return mapper;
 		}
 
 		synchronized (fm) {
 			if (mapper == null) {
-				mapper = new Mapper(mapperAdapterId, _mapper_sp.getAdapter(mapperAdapterId));
+				mapper = new Mapper(mapperAdapter);
 				fm.addFacade(mapper);
 			}
 			return mapper;
@@ -53,11 +48,11 @@ public final class Mapper extends Facade {
 
 	public <T> T convert(Object sourceObj, String mappingURI, Map<String, Object> argsMap, Class<T> valueType)
 			throws AdapterException {
-		return mapperAdapter.convert(sourceObj, mappingURI, argsMap, valueType);
+		return adapter.convert(sourceObj, mappingURI, argsMap, valueType);
 	}
 
 	public <T> T convert(Object sourceObj, String mappingURI, Class<T> valueType) throws AdapterException {
-		return mapperAdapter.convert(sourceObj, mappingURI, valueType);
+		return adapter.convert(sourceObj, mappingURI, valueType);
 	}
 
 }

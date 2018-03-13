@@ -3,6 +3,7 @@ package com.github.jmodel.adapter.api.search;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Searcher adapter
@@ -13,8 +14,8 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class SearcherAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.SEARCHER.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.SEARCHER_ADAPTER);
 	}
 
 	//

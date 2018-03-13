@@ -1,6 +1,10 @@
 package com.github.jmodel.adapter.spi.log;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
+import com.github.jmodel.adapter.spi.AdapterFactory;
 
 /**
  * Logger adapter factory interface.
@@ -8,8 +12,12 @@ import com.github.jmodel.adapter.api.log.LoggerAdapter;
  * @author jianni@hotmail.com
  *
  */
-public interface LoggerAdapterFactory {
+public abstract class LoggerAdapterFactory extends AdapterFactory<LoggerAdapter> {
 
-	public LoggerAdapter getAdapter(String loggerAdapterId);
+	protected final void init() {
+		map = new TreeMap<String, LoggerAdapter>();
+		createLoggerAdapters(map);
+	}
 
+	protected abstract void createLoggerAdapters(SortedMap<String, LoggerAdapter> map);
 }

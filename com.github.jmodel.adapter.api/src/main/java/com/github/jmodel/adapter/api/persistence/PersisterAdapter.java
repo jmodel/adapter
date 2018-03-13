@@ -3,6 +3,7 @@ package com.github.jmodel.adapter.api.persistence;
 import com.github.jmodel.adapter.AdapterException;
 import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.Adapter;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Persister adapter
@@ -13,9 +14,11 @@ import com.github.jmodel.adapter.api.Adapter;
 public abstract class PersisterAdapter extends Adapter {
 
 	@Override
-	public String getItemId() {
-		return AdapterTerms.PERSISTER.toString();
+	public Term getItemTerm() {
+		return tfs.getTerm(AdapterTerms.PERSISTER_ADAPTER);
 	}
+
+	//
 
 	public abstract <S, T> Long insert(S session, Action<?, ?, ?> action, String json, Class<T> clz)
 			throws AdapterException;

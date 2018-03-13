@@ -3,10 +3,10 @@ package com.github.jmodel.adapter;
 import java.util.function.Supplier;
 
 import com.github.jmodel.adapter.api.Facade;
-import com.github.jmodel.adapter.api.Term;
 import com.github.jmodel.adapter.api.log.LoggerAdapter;
 import com.github.jmodel.adapter.api.log.LoggerAdapterFactoryService;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * Simple log facade.
@@ -33,7 +33,7 @@ import com.github.jmodel.adapter.api.log.LoggerWrapper;
  * @see com.github.jmodel.adapter.api.Facade
  *
  */
-public final class Logger extends Facade {
+public final class Logger extends Facade<LoggerAdapter> {
 
 	/**
 	 * Logger adapter factory service
@@ -41,8 +41,6 @@ public final class Logger extends Facade {
 	private final static LoggerAdapterFactoryService _logger_sp = LoggerAdapterFactoryService.getInstance();
 
 	private LoggerWrapper<?> loggerWrapper;
-
-	private LoggerAdapter loggerAdapter;
 
 	/**
 	 * internal use
@@ -52,12 +50,8 @@ public final class Logger extends Facade {
 	 * @param loggerAdapter
 	 *            logger adapter instance
 	 */
-	private Logger(String id, LoggerAdapter loggerAdapter) {
-		if (loggerAdapter == null) {
-			throw new RuntimeException("Logger adapter is not found.");
-		}
-		this.id = id;
-		this.loggerAdapter = loggerAdapter;
+	private Logger(LoggerAdapter loggerAdapter) {
+		this.adapter = loggerAdapter;
 	}
 
 	/**
@@ -94,16 +88,17 @@ public final class Logger extends Facade {
 	 *            A name for the logger
 	 * @return a suitable Logger
 	 */
-	public static Logger getLogger(Term t, String name) {
-		String loggerAdapterId = getAdapterId(AdapterTerms.LOGGER, t);
-		Logger logger = fm.getFacade(loggerAdapterId);
+	public static Logger getLogger(Term adapterTerm, String name) {
+		LoggerAdapter loggerAdapter = _logger_sp
+				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.LOGGER_ADAPTER), adapterTerm));
+		Logger logger = fm.getFacade(loggerAdapter);
 		if (logger != null) {
 			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
 		}
 
 		synchronized (fm) {
 			if (logger == null) {
-				logger = new Logger(loggerAdapterId, _logger_sp.getAdapter(loggerAdapterId));
+				logger = new Logger(loggerAdapter);
 				fm.addFacade(logger);
 			}
 			return new Logger(logger.getLoggerAdapter().getLoggerWrapper(name));
@@ -165,7 +160,7 @@ public final class Logger extends Facade {
 	//
 
 	private LoggerAdapter getLoggerAdapter() {
-		return loggerAdapter;
+		return adapter;
 	}
 
 }

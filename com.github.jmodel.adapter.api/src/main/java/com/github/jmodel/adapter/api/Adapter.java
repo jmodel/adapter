@@ -1,7 +1,7 @@
 package com.github.jmodel.adapter.api;
 
-import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.config.Configurable;
+import com.github.jmodel.adapter.spi.Term;
 
 /**
  * The Adapter concept is used in mutable business application context. For
@@ -19,10 +19,10 @@ import com.github.jmodel.adapter.api.config.Configurable;
  * @author jianni@hotmail.com
  *
  */
-public abstract class Adapter implements Configurable {
+public abstract class Adapter implements Configurable, TermAware {
 
 	@Override
-	public String getRegionId() {
-		return AdapterTerms.ADAPTER.toString();
+	public Term getRegionTerm() {
+		return tfs.getTerm("Adapter");
 	}
 }

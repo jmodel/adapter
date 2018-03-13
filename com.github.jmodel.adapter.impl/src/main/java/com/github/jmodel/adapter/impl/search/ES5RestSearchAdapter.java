@@ -86,7 +86,7 @@ public class ES5RestSearchAdapter extends SearcherAdapter {
 		synchronized (cm) {
 
 			String hostInfoList = cm.getPropertyValue(AdapterImplTerms.ES5_HOST.toString(),
-					AdapterTerms.ADAPTER.toString(), AdapterTerms.SEARCHER.toString());
+					AdapterTerms.ADAPTER.toString(), AdapterTerms.SEARCHER_ADAPTER.toString());
 			if (hostInfoList == null) {
 				throw new MissingConfigException("ES5 host info is not found in configuration.");
 			}
