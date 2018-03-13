@@ -13,7 +13,7 @@ import com.github.jmodel.adapter.spi.config.ConfiguratorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class ConfiguratorAdapterFactoryImpl implements ConfiguratorAdapterFactory {
+public final class ConfiguratorAdapterFactoryImpl implements ConfiguratorAdapterFactory {
 
 	private SortedMap<String, ConfiguratorAdapter<?>> map;
 

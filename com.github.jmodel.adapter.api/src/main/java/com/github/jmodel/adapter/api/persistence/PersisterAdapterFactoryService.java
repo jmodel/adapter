@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.persistence.PersisterAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class PersisterAdapterFactoryService {
+public final class PersisterAdapterFactoryService {
 
 	private static PersisterAdapterFactoryService service;
 
@@ -22,10 +22,16 @@ public class PersisterAdapterFactoryService {
 	}
 
 	public static synchronized PersisterAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new PersisterAdapterFactoryService();
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (PersisterAdapterFactoryService.class) {
+			if (service == null) {
+				service = new PersisterAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public PersisterAdapter getAdapter(String text) {

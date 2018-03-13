@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.mapping.MapperAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class MapperAdapterFactoryService {
+public final class MapperAdapterFactoryService {
 
 	private static MapperAdapterFactoryService service;
 
@@ -21,11 +21,18 @@ public class MapperAdapterFactoryService {
 		loader = ServiceLoader.load(MapperAdapterFactory.class);
 	}
 
-	public static synchronized MapperAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new MapperAdapterFactoryService();
+	public static MapperAdapterFactoryService getInstance() {
+
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (MapperAdapterFactoryService.class) {
+			if (service == null) {
+				service = new MapperAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public MapperAdapter getAdapter(String text) {

@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.TermFactory;
  * @author jianni@hotmail.com
  *
  */
-public class TermFactoryService {
+public final class TermFactoryService {
 
 	private static TermFactoryService service;
 
@@ -22,11 +22,17 @@ public class TermFactoryService {
 		loader = ServiceLoader.load(TermFactory.class);
 	}
 
-	public static synchronized TermFactoryService getInstance() {
-		if (service == null) {
-			service = new TermFactoryService();
+	static TermFactoryService getInstance() {
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (TermFactoryService.class) {
+			if (service == null) {
+				service = new TermFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public Term getTerm(String termText) {

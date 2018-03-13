@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.cache.CacherAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class CacherAdapterFactoryImpl extends CacherAdapterFactory {
+public final class CacherAdapterFactoryImpl extends CacherAdapterFactory {
 
 	@Override
 	protected void createCacherAdapters(SortedMap<String, CacherAdapter> map) {

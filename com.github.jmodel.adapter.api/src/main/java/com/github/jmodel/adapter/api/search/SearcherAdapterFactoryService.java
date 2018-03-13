@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.search.SearcherAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class SearcherAdapterFactoryService {
+public final class SearcherAdapterFactoryService {
 
 	private static SearcherAdapterFactoryService service;
 
@@ -22,10 +22,16 @@ public class SearcherAdapterFactoryService {
 	}
 
 	public static synchronized SearcherAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new SearcherAdapterFactoryService();
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (SearcherAdapterFactoryService.class) {
+			if (service == null) {
+				service = new SearcherAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public SearcherAdapter getAdapter(String text) {

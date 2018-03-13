@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.TermFactory;
  * @author jianni@hotmail.com
  *
  */
-public class AdapterImplTermFactory extends TermFactory {
+public final class AdapterImplTermFactory extends TermFactory {
 
 	@Override
 	protected void createTerms(SortedMap<String, Term> map) {

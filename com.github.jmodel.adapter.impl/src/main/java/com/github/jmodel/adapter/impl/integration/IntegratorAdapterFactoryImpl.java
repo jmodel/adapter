@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.integration.IntegratorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class IntegratorAdapterFactoryImpl extends IntegratorAdapterFactory {
+public final class IntegratorAdapterFactoryImpl extends IntegratorAdapterFactory {
 
 	@Override
 	protected void createIntegratorAdapters(SortedMap<String, IntegratorAdapter> map) {

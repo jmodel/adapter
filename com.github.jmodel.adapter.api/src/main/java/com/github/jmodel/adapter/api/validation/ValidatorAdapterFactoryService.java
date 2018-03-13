@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.validation.ValidatorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class ValidatorAdapterFactoryService {
+public final class ValidatorAdapterFactoryService {
 
 	private static ValidatorAdapterFactoryService service;
 
@@ -22,10 +22,16 @@ public class ValidatorAdapterFactoryService {
 	}
 
 	public static synchronized ValidatorAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new ValidatorAdapterFactoryService();
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (ValidatorAdapterFactoryService.class) {
+			if (service == null) {
+				service = new ValidatorAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public ValidatorAdapter getAdapter(String text) {

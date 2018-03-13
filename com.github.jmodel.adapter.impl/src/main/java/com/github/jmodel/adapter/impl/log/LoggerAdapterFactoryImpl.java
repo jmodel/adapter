@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.log.LoggerAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class LoggerAdapterFactoryImpl extends LoggerAdapterFactory {
+public final class LoggerAdapterFactoryImpl extends LoggerAdapterFactory {
 
 	@Override
 	protected void createLoggerAdapters(SortedMap<String, LoggerAdapter> map) {

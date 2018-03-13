@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.integration.IntegratorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class IntegratorAdapterFactoryService {
+public final class IntegratorAdapterFactoryService {
 
 	private static IntegratorAdapterFactoryService service;
 
@@ -21,11 +21,17 @@ public class IntegratorAdapterFactoryService {
 		loader = ServiceLoader.load(IntegratorAdapterFactory.class);
 	}
 
-	public static synchronized IntegratorAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new IntegratorAdapterFactoryService();
+	public static IntegratorAdapterFactoryService getInstance() {
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (IntegratorAdapterFactoryService.class) {
+			if (service == null) {
+				service = new IntegratorAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public IntegratorAdapter getAdapter(String text) {

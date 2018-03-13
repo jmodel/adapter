@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.log.LoggerAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class LoggerAdapterFactoryService {
+public final class LoggerAdapterFactoryService {
 
 	private static LoggerAdapterFactoryService service;
 
@@ -21,11 +21,17 @@ public class LoggerAdapterFactoryService {
 		loader = ServiceLoader.load(LoggerAdapterFactory.class);
 	}
 
-	public static synchronized LoggerAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new LoggerAdapterFactoryService();
+	public static LoggerAdapterFactoryService getInstance() {
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (LoggerAdapterFactoryService.class) {
+			if (service == null) {
+				service = new LoggerAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public LoggerAdapter getAdapter(String text) {

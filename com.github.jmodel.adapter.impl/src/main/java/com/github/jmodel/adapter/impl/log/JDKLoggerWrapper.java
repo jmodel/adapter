@@ -17,7 +17,7 @@ import sun.misc.SharedSecrets;
  *
  */
 @SuppressWarnings("restriction")
-public class JDKLoggerWrapper implements LoggerWrapper<Logger> {
+public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 
 	private Logger logger;
 

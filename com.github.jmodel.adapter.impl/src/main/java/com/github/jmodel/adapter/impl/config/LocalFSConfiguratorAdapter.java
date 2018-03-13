@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.api.config.ConfiguratorAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class LocalFSConfiguratorAdapter extends ConfiguratorAdapter<String> {
+public final class LocalFSConfiguratorAdapter extends ConfiguratorAdapter<String> {
 
 	@Override
 	public Configuration read(String fileName) {

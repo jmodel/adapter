@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.cache.CacherAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class CacherAdapterFactoryService {
+public final class CacherAdapterFactoryService {
 
 	private static CacherAdapterFactoryService service;
 
@@ -21,11 +21,17 @@ public class CacherAdapterFactoryService {
 		loader = ServiceLoader.load(CacherAdapterFactory.class);
 	}
 
-	public static synchronized CacherAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new CacherAdapterFactoryService();
+	public static CacherAdapterFactoryService getInstance() {
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (CacherAdapterFactoryService.class) {
+			if (service == null) {
+				service = new CacherAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	public CacherAdapter getAdapter(String text) {

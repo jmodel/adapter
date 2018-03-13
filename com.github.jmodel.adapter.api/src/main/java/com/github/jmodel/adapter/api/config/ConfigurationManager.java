@@ -24,7 +24,7 @@ public final class ConfigurationManager {
 
 	}
 
-	public static ConfigurationManager getInstance() {
+	static ConfigurationManager getInstance() {
 		if (configurationManager != null) {
 			return configurationManager;
 		}

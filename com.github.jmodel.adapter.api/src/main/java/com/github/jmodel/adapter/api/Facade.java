@@ -32,6 +32,8 @@ import com.github.jmodel.adapter.spi.Term;
  * @see com.github.jmodel.adapter.api.config.ConfigurationAware
  * @see com.github.jmodel.adapter.api.TermAware
  *
+ * @param <T>
+ *            adapter type
  */
 public abstract class Facade<T extends Adapter> implements ConfigurationAware, TermAware {
 

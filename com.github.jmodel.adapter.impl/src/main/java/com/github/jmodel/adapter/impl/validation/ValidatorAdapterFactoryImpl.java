@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.validation.ValidatorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class ValidatorAdapterFactoryImpl extends ValidatorAdapterFactory {
+public final class ValidatorAdapterFactoryImpl extends ValidatorAdapterFactory {
 
 	@Override
 	protected void createValidatorAdapters(SortedMap<String, ValidatorAdapter> map) {

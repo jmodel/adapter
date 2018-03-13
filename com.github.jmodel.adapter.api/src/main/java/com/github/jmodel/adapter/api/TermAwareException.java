@@ -7,7 +7,7 @@ package com.github.jmodel.adapter.api;
  * @author jianni@hotmail.com
  *
  */
-public class TermAwareException extends RuntimeException {
+public final class TermAwareException extends RuntimeException {
 
 	private static final long serialVersionUID = 8266322551659982022L;
 

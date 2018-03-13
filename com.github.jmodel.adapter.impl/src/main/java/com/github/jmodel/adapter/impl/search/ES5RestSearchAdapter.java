@@ -27,7 +27,7 @@ import com.github.jmodel.adapter.impl.AdapterImplTerms;
  * @author jianni@hotmail.com
  *
  */
-public class ES5RestSearchAdapter extends SearcherAdapter {
+public final class ES5RestSearchAdapter extends SearcherAdapter {
 
 	/**
 	 * RestClient is official low-level client for Elasticsearch. Allows to

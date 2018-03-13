@@ -13,7 +13,7 @@ import com.github.jmodel.mapper.ModelMapper;
  * @author jianni@hotmail.com
  *
  */
-public class MapperAdapterImpl extends MapperAdapter {
+public final class MapperAdapterImpl extends MapperAdapter {
 
 	@Override
 	public <T> T convert(Object sourceObj, String mappingURI, Map<String, Object> argsMap, Class<T> valueType)

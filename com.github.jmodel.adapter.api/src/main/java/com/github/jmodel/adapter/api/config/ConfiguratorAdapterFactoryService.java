@@ -14,7 +14,7 @@ import com.github.jmodel.adapter.spi.config.ConfiguratorAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class ConfiguratorAdapterFactoryService {
+public final class ConfiguratorAdapterFactoryService {
 
 	private static ConfiguratorAdapterFactoryService service;
 

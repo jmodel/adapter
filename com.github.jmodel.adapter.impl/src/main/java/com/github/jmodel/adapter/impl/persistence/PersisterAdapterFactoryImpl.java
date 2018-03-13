@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.persistence.PersisterAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class PersisterAdapterFactoryImpl extends PersisterAdapterFactory {
+public final class PersisterAdapterFactoryImpl extends PersisterAdapterFactory {
 
 	@Override
 	protected void createPersisterAdapters(SortedMap<String, PersisterAdapter> map) {

@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
  * @author jianni@hotmail.com
  *
  */
-public class PersisterAdapterImpl extends PersisterAdapter {
+public final class PersisterAdapterImpl extends PersisterAdapter {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 

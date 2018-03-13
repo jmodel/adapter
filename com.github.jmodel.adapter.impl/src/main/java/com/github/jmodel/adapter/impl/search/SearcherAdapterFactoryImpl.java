@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.search.SearcherAdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public class SearcherAdapterFactoryImpl extends SearcherAdapterFactory {
+public final class SearcherAdapterFactoryImpl extends SearcherAdapterFactory {
 
 	@Override
 	protected void createSearcherAdapters(SortedMap<String, SearcherAdapter> map) {

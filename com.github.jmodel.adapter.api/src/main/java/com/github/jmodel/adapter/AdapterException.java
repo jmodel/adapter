@@ -7,7 +7,7 @@ package com.github.jmodel.adapter;
  * @author jianni@hotmail.com
  *
  */
-public class AdapterException extends Exception {
+public final class AdapterException extends Exception {
 
 	private static final long serialVersionUID = 5049750180833027559L;
 
