@@ -16,7 +16,7 @@ public final class MapperAdapterFactoryImpl extends MapperAdapterFactory {
 
 	@Override
 	protected void createMapperAdapters(SortedMap<String, MapperAdapter> map) {
-		map.put(AdapterImplTerms.JMODEL_MAPPER, new MapperAdapterImpl());
+		map.put(AdapterImplTerms.JMODEL_MAPPER, new JModelMapperAdapter());
 	}
 
 }

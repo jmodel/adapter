@@ -16,7 +16,7 @@ public final class ValidatorAdapterFactoryImpl extends ValidatorAdapterFactory {
 
 	@Override
 	protected void createValidatorAdapters(SortedMap<String, ValidatorAdapter> map) {
-		map.put(AdapterImplTerms.MODEL_VALIDATOR, new ValidatorAdapterImpl());
+		map.put(AdapterImplTerms.MODEL_VALIDATOR, new JModelValidatorAdapter());
 	}
 
 }

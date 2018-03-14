@@ -9,7 +9,7 @@ import com.github.jmodel.adapter.api.validation.ValidatorAdapter;
  * @author jianni@hotmail.com
  *
  */
-public final class ValidatorAdapterImpl extends ValidatorAdapter {
+public final class JModelValidatorAdapter extends ValidatorAdapter {
 
 	@Override
 	public <T> T check(Object sourceObj, String validatingURI) throws AdapterException {

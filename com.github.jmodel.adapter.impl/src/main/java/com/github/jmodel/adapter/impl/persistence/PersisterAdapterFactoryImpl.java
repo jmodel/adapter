@@ -16,7 +16,7 @@ public final class PersisterAdapterFactoryImpl extends PersisterAdapterFactory {
 
 	@Override
 	protected void createPersisterAdapters(SortedMap<String, PersisterAdapter> map) {
-		map.put(AdapterImplTerms.MYBATIS_PERSISTER, new PersisterAdapterImpl());
+		map.put(AdapterImplTerms.MYBATIS_PERSISTER, new MybatisPersisterAdapter());
 	}
 
 }

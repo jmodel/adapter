@@ -11,11 +11,11 @@ import com.github.jmodel.adapter.api.persistence.PersisterAdapter;
  * @author jianni@hotmail.com
  *
  */
-public final class PersisterAdapterImpl extends PersisterAdapter {
+public final class MybatisPersisterAdapter extends PersisterAdapter {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	public PersisterAdapterImpl() {
+	public MybatisPersisterAdapter() {
 
 	}
 
