@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.api.log.LoggerWrapper;
  * @author jianni@hotmail.com
  *
  */
-public final class JDKLoggerAdapter extends LoggerAdapter {
+public final class JDKLoggerAdapter extends LoggerAdapter<String> {
 
 	@Override
 	public LoggerWrapper<Logger> getLoggerWrapper(String clzName) {

@@ -19,6 +19,9 @@ import sun.misc.SharedSecrets;
 @SuppressWarnings("restriction")
 public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 
+	/**
+	 * JDK Logger
+	 */
 	private Logger logger;
 
 	public JDKLoggerWrapper(Logger logger) {
@@ -28,45 +31,45 @@ public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 	//
 
 	@Override
-	public void debug(Supplier<String> msgSupplier) {
+	public void debug(Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.ALL)) {
-			LogRecord logRecord = new LogRecord(Level.ALL, msgSupplier.get());
+			LogRecord logRecord = new LogRecord(Level.ALL, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
 		}
 	}
 
 	@Override
-	public void trace(Supplier<String> msgSupplier) {
+	public void trace(Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.FINE)) {
-			LogRecord logRecord = new LogRecord(Level.FINE, msgSupplier.get());
+			LogRecord logRecord = new LogRecord(Level.FINE, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
 		}
 	}
 
 	@Override
-	public void info(Supplier<String> msgSupplier) {
+	public void info(Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.INFO)) {
-			LogRecord logRecord = new LogRecord(Level.INFO, msgSupplier.get());
+			LogRecord logRecord = new LogRecord(Level.INFO, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
 		}
 	}
 
 	@Override
-	public void warn(Supplier<String> msgSupplier) {
+	public void warn(Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.WARNING)) {
-			LogRecord logRecord = new LogRecord(Level.WARNING, msgSupplier.get());
+			LogRecord logRecord = new LogRecord(Level.WARNING, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
 		}
 	}
 
 	@Override
-	public void error(Supplier<String> msgSupplier) {
+	public void error(Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.SEVERE)) {
-			LogRecord logRecord = new LogRecord(Level.SEVERE, msgSupplier.get());
+			LogRecord logRecord = new LogRecord(Level.SEVERE, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
 		}

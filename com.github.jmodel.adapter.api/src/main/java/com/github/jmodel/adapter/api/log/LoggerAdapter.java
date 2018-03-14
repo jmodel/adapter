@@ -11,7 +11,7 @@ import com.github.jmodel.adapter.spi.Term;
  * @author jianni@hotmail.com
  *
  */
-public abstract class LoggerAdapter extends Adapter {
+public abstract class LoggerAdapter<T> extends Adapter {
 
 	@Override
 	public Term getItemTerm() {

@@ -33,7 +33,7 @@ import com.github.jmodel.adapter.spi.Term;
  * @see com.github.jmodel.adapter.api.Facade
  *
  */
-public final class Logger extends Facade<LoggerAdapter> {
+public final class Logger extends Facade<LoggerAdapter<?>> {
 
 	/**
 	 * Logger adapter factory service
@@ -50,7 +50,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param loggerAdapter
 	 *            logger adapter instance
 	 */
-	private Logger(LoggerAdapter loggerAdapter) {
+	private Logger(LoggerAdapter<?> loggerAdapter) {
 		this.adapter = loggerAdapter;
 	}
 
@@ -65,7 +65,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 
 	}
 
-	//
+	// public methods
 
 	/**
 	 * Create a Logger object which uses default logger adapter to write message.
@@ -89,7 +89,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @return a suitable Logger
 	 */
 	public static Logger getLogger(Term adapterTerm, String name) {
-		LoggerAdapter loggerAdapter = _logger_sp
+		LoggerAdapter<?> loggerAdapter = _logger_sp
 				.getAdapter(getTermText(tfs.getTerm(AdapterTerms.LOGGER_ADAPTER), adapterTerm));
 		Logger logger = fm.getFacade(loggerAdapter);
 		if (logger != null) {
@@ -113,7 +113,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param msgSupplier
 	 *            the message supplier to be logged
 	 */
-	public void debug(Supplier<String> msgSupplier) {
+	public void debug(Supplier<?> msgSupplier) {
 
 	}
 
@@ -123,7 +123,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param msgSupplier
 	 *            the message supplier to be logged
 	 */
-	public void trace(Supplier<String> msgSupplier) {
+	public void trace(Supplier<?> msgSupplier) {
 
 	}
 
@@ -133,7 +133,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param msgSupplier
 	 *            the message supplier to be logged
 	 */
-	public void info(Supplier<String> msgSupplier) {
+	public void info(Supplier<?> msgSupplier) {
 		loggerWrapper.info(msgSupplier);
 	}
 
@@ -143,7 +143,7 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param msgSupplier
 	 *            the message supplier to be logged
 	 */
-	public void warn(Supplier<String> msgSupplier) {
+	public void warn(Supplier<?> msgSupplier) {
 		loggerWrapper.warn(msgSupplier);
 	}
 
@@ -153,13 +153,13 @@ public final class Logger extends Facade<LoggerAdapter> {
 	 * @param msgSupplier
 	 *            the message supplier to be logged
 	 */
-	public void error(Supplier<String> msgSupplier) {
+	public void error(Supplier<?> msgSupplier) {
 		loggerWrapper.error(msgSupplier);
 	}
 
-	//
+	// private methods
 
-	private LoggerAdapter getLoggerAdapter() {
+	private LoggerAdapter<?> getLoggerAdapter() {
 		return adapter;
 	}
 

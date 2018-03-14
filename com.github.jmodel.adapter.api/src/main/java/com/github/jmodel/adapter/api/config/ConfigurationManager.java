@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Configuration manager
- * <p>
- * 
+ * ConfigurationManager is used to manage configurations. In enterprise
+ * environment, multiple configurations should be supported. For example,
+ * baseline version defined a basic configuration, the customized project need
+ * own configuration to extend or override basic configuration.
  * 
  * @author jianni@hotmail.com
  *
@@ -18,7 +19,7 @@ public final class ConfigurationManager {
 
 	private final List<Configuration> configurationList = new ArrayList<Configuration>();
 
-	//
+	// construction methods
 
 	private ConfigurationManager() {
 
@@ -35,25 +36,20 @@ public final class ConfigurationManager {
 		}
 	}
 
-	//
+	// public methods
 
 	public synchronized void addConfiguration(Configuration configuration) {
 		configurationList.add(configuration);
 	}
-
-	//
 
 	public <T> ConfiguratorAdapter<T> getAdapter() {
 		return getAdapter(null);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> ConfiguratorAdapter<T> getAdapter(String configuratorAdapterId) {
-		return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance()
-				.getAdapter(configuratorAdapterId);
+	public <T> ConfiguratorAdapter<T> getAdapter(String text) {
+		return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance().getAdapter(text);
 	}
-
-	//
 
 	public Item getItem(String regionId, String... itemIds) {
 
@@ -94,7 +90,7 @@ public final class ConfigurationManager {
 				"regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds) + " property:" + propertyName);
 	}
 
-	//
+	// private methods
 
 	private Item getItem(Configuration configuration, String regionId, String... itemIds) {
 		Region region = configuration.getRegionList().stream().filter(it -> it.getId().equals(regionId)).findFirst()

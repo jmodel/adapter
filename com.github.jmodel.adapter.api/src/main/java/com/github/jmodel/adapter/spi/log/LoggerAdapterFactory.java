@@ -12,12 +12,12 @@ import com.github.jmodel.adapter.spi.AdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public abstract class LoggerAdapterFactory extends AdapterFactory<LoggerAdapter> {
+public abstract class LoggerAdapterFactory extends AdapterFactory<LoggerAdapter<?>> {
 
 	protected final void init() {
-		map = new TreeMap<String, LoggerAdapter>();
+		map = new TreeMap<String, LoggerAdapter<?>>();
 		createLoggerAdapters(map);
 	}
 
-	protected abstract void createLoggerAdapters(SortedMap<String, LoggerAdapter> map);
+	protected abstract void createLoggerAdapters(SortedMap<String, LoggerAdapter<?>> map);
 }

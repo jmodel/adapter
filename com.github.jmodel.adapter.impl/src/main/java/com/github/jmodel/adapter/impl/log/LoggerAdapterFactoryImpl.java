@@ -15,7 +15,7 @@ import com.github.jmodel.adapter.spi.log.LoggerAdapterFactory;
 public final class LoggerAdapterFactoryImpl extends LoggerAdapterFactory {
 
 	@Override
-	protected void createLoggerAdapters(SortedMap<String, LoggerAdapter> map) {
+	protected void createLoggerAdapters(SortedMap<String, LoggerAdapter<?>> map) {
 		map.put(AdapterImplTerms.JDK_LOGGER, new JDKLoggerAdapter());
 
 	}
