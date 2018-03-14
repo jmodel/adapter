@@ -21,7 +21,7 @@ public final class PersisterAdapterFactoryService {
 		loader = ServiceLoader.load(PersisterAdapterFactory.class);
 	}
 
-	public static synchronized PersisterAdapterFactoryService getInstance() {
+	public static PersisterAdapterFactoryService getInstance() {
 		if (service != null) {
 			return service;
 		}

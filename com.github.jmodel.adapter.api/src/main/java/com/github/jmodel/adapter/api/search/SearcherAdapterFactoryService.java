@@ -21,7 +21,7 @@ public final class SearcherAdapterFactoryService {
 		loader = ServiceLoader.load(SearcherAdapterFactory.class);
 	}
 
-	public static synchronized SearcherAdapterFactoryService getInstance() {
+	public static SearcherAdapterFactoryService getInstance() {
 		if (service != null) {
 			return service;
 		}

@@ -9,13 +9,16 @@ import com.github.jmodel.adapter.api.persistence.PersisterAdapterFactoryService;
 import com.github.jmodel.adapter.spi.Term;
 
 /**
- * Public API for persistence.
+ * Simple persistence facade.
  * 
  * @author jianni@hotmail.com
  *
  */
 public final class Persister extends Facade<PersisterAdapter> {
 
+	/**
+	 * Persister adapter factory service
+	 */
 	private final static PersisterAdapterFactoryService _persister_sp = PersisterAdapterFactoryService.getInstance();
 
 	private Persister(PersisterAdapter persisterAdapter) {
@@ -44,6 +47,8 @@ public final class Persister extends Facade<PersisterAdapter> {
 			return persister;
 		}
 	}
+
+	//
 
 	public <S, T> Long insert(S session, Action<?, ?, ?> action, String json, Class<T> valueType)
 			throws AdapterException {

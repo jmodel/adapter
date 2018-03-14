@@ -6,13 +6,16 @@ import com.github.jmodel.adapter.api.validation.ValidatorAdapterFactoryService;
 import com.github.jmodel.adapter.spi.Term;
 
 /**
- * Public API for validation.
+ * Simple validation facade.
  * 
  * @author jianni@hotmail.com
  *
  */
 public final class Validator extends Facade<ValidatorAdapter> {
 
+	/**
+	 * Validator adapter factory service
+	 */
 	private final static ValidatorAdapterFactoryService _validator_sp = ValidatorAdapterFactoryService.getInstance();
 
 	private Validator(ValidatorAdapter validatorAdapter) {

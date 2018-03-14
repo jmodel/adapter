@@ -8,13 +8,16 @@ import com.github.jmodel.adapter.api.mapping.MapperAdapterFactoryService;
 import com.github.jmodel.adapter.spi.Term;
 
 /**
- * Public API for mapping.
+ * Simple mapping facade.
  * 
  * @author jianni@hotmail.com
  *
  */
 public final class Mapper extends Facade<MapperAdapter> {
 
+	/**
+	 * Mapper adapter factory service
+	 */
 	private final static MapperAdapterFactoryService _mapper_sp = MapperAdapterFactoryService.getInstance();
 
 	private Mapper(MapperAdapter mapperAdapter) {

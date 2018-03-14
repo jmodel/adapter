@@ -21,7 +21,7 @@ public final class ValidatorAdapterFactoryService {
 		loader = ServiceLoader.load(ValidatorAdapterFactory.class);
 	}
 
-	public static synchronized ValidatorAdapterFactoryService getInstance() {
+	public static ValidatorAdapterFactoryService getInstance() {
 		if (service != null) {
 			return service;
 		}

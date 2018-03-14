@@ -7,13 +7,16 @@ import com.github.jmodel.adapter.api.search.SearcherAdapterFactoryService;
 import com.github.jmodel.adapter.spi.Term;
 
 /**
- * Public API for search.
+ * Simple search facade.
  * 
  * @author jianni@hotmail.com
  *
  */
 public final class Searcher extends Facade<SearcherAdapter> {
 
+	/**
+	 * Searcher adapter factory service
+	 */
 	private final static SearcherAdapterFactoryService _searcher_sp = SearcherAdapterFactoryService.getInstance();
 
 	private Searcher(SearcherAdapter searcherAdapter) {
