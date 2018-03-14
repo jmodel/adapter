@@ -19,7 +19,7 @@ public class RootConfigurationLoader extends ConfigurationLoader {
 	}
 
 	protected void init() {
-		cm.addConfiguration(cm.getAdapter().read("_config.xml"));
+		addConfiguration(cm.getAdapter().read("_config.xml"));
 	}
 
 }

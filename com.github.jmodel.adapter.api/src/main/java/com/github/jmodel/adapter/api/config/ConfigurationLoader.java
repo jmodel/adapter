@@ -20,6 +20,10 @@ abstract class ConfigurationLoader extends Initializable {
 		doInit();
 	}
 
+	protected final void addConfiguration(Configuration configuration) {
+		cm.addConfiguration(configuration);
+	}
+
 	static final String printUsage() {
 		return "\t\nConfiguration must be loaded when application bootstrapping...\t\n"
 				+ "For example: RootConfigurationLoader.getInstance().load()";

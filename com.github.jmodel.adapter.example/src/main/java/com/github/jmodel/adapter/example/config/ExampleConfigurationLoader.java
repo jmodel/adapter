@@ -22,7 +22,7 @@ public class ExampleConfigurationLoader extends RootConfigurationLoader {
 
 		super.init();
 
-		cm.addConfiguration(cm.getAdapter().read("config.xml"));
+		addConfiguration(cm.getAdapter().read("config.xml"));
 
 	}
 }
