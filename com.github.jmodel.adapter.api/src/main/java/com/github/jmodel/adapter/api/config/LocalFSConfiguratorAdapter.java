@@ -1,4 +1,4 @@
-package com.github.jmodel.adapter.impl.config;
+package com.github.jmodel.adapter.api.config;
 
 import javax.xml.bind.JAXBContext;
 

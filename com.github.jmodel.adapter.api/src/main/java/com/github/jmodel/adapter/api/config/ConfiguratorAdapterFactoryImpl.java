@@ -1,10 +1,9 @@
-package com.github.jmodel.adapter.impl.config;
+package com.github.jmodel.adapter.api.config;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.github.jmodel.adapter.api.config.ConfiguratorAdapter;
-import com.github.jmodel.adapter.impl.AdapterImplTerms;
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.spi.config.ConfiguratorAdapterFactory;
 
 /**
@@ -19,7 +18,7 @@ public final class ConfiguratorAdapterFactoryImpl implements ConfiguratorAdapter
 
 	public ConfiguratorAdapterFactoryImpl() {
 		map = new TreeMap<String, ConfiguratorAdapter<?>>();
-		map.put(AdapterImplTerms.LFS_CONFIGURATOR.toString(), new LocalFSConfiguratorAdapter());
+		map.put(AdapterTerms.LFS_CONFIGURATOR, new LocalFSConfiguratorAdapter());
 	}
 
 	@Override

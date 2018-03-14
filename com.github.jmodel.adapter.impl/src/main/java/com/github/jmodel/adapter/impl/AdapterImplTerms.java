@@ -2,9 +2,6 @@ package com.github.jmodel.adapter.impl;
 
 public interface AdapterImplTerms {
 
-	// Configuration
-	public final static String LFS_CONFIGURATOR = "LFS_CONFIGURATOR";
-
 	// Cache
 	public final static String JCS_CACHER = "JCS_CACHER";
 

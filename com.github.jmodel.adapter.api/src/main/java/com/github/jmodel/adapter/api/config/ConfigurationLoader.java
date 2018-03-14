@@ -10,7 +10,7 @@ import com.github.jmodel.adapter.api.Initializable;
  * @see com.github.jmodel.adapter.api.Initializable
  *
  */
-public abstract class ConfigurationLoader extends Initializable {
+abstract class ConfigurationLoader extends Initializable {
 
 	/**
 	 * Load configurations.

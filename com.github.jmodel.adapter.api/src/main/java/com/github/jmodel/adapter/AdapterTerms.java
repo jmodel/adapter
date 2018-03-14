@@ -8,6 +8,9 @@ package com.github.jmodel.adapter;
  */
 public interface AdapterTerms {
 
+	// Configuration
+	public final static String LFS_CONFIGURATOR = "LFS_CONFIGURATOR";
+
 	public final static String ADAPTER = "Adapter";
 
 	public final static String CACHER_ADAPTER = "CacherAdapter";

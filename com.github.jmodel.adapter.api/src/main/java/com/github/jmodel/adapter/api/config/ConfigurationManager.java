@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
+import com.github.jmodel.adapter.AdapterTerms;
+
 /**
  * ConfigurationManager is used to manage configurations. In enterprise
  * environment, multiple configurations should be supported. For example,
@@ -82,7 +84,12 @@ public final class ConfigurationManager {
 
 	@SuppressWarnings("unchecked")
 	public <T> ConfiguratorAdapter<T> getAdapter(String text) {
-		return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance().getAdapter(text);
+		if (text == null) {
+			return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance()
+					.getAdapter(AdapterTerms.LFS_CONFIGURATOR);
+		} else {
+			return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance().getAdapter(text);
+		}
 	}
 
 	public Item getItem(String regionId, String... itemIds) {
