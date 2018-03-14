@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Configuration
- * <p>
  * 
  * 
  * @author jianni@hotmail.com

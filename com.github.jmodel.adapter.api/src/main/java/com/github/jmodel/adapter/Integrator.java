@@ -8,7 +8,7 @@ import com.github.jmodel.adapter.api.integration.IntegratorAdapterFactoryService
 import com.github.jmodel.adapter.spi.Term;
 
 /**
- * Public API for integration.
+ * Simple integration facade.
  * 
  * @author jianni@hotmail.com
  *
@@ -21,7 +21,7 @@ public final class Integrator extends Facade<IntegratorAdapter> {
 		this.adapter = integratorAdapter;
 	}
 
-	//
+	// public static methods
 
 	public static Integrator getIntegrator() {
 		return getIntegrator(null);
@@ -43,7 +43,7 @@ public final class Integrator extends Facade<IntegratorAdapter> {
 		}
 	}
 
-	//
+	// public methods
 
 	public void dispatch(String pointName, Serializable content) {
 		adapter.dispatch();

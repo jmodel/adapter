@@ -30,8 +30,8 @@ public class ES5SearcherAdapter {
 		}
 
 		try {
-			searcher.search("/myindex/mytype", "{\"query\" : {\"match_all\" : {}}}");
-			logger.info(() -> "finish searching");
+			String a = searcher.search("/myindex/mytype", "{\"query\" : {\"match_all\" : {}}}");
+			logger.info(() -> a);
 		} catch (AdapterException e) {
 			e.printStackTrace();
 		}

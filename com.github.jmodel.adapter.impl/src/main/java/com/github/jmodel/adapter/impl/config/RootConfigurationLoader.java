@@ -24,4 +24,5 @@ public class RootConfigurationLoader extends ConfigurationLoader {
 	protected void init() {
 		cm.addConfiguration(cm.getAdapter(AdapterImplTerms.LFS_CONFIGURATOR).read("_config.xml"));
 	}
+
 }

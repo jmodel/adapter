@@ -24,11 +24,18 @@ public final class ConfiguratorAdapterFactoryService {
 		loader = ServiceLoader.load(ConfiguratorAdapterFactory.class);
 	}
 
-	public static synchronized ConfiguratorAdapterFactoryService getInstance() {
-		if (service == null) {
-			service = new ConfiguratorAdapterFactoryService();
+	static ConfiguratorAdapterFactoryService getInstance() {
+
+		if (service != null) {
+			return service;
 		}
-		return service;
+
+		synchronized (ConfiguratorAdapterFactoryService.class) {
+			if (service == null) {
+				service = new ConfiguratorAdapterFactoryService();
+			}
+			return service;
+		}
 	}
 
 	/**

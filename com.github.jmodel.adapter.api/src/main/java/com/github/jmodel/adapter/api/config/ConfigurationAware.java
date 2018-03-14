@@ -3,7 +3,7 @@ package com.github.jmodel.adapter.api.config;
 import com.github.jmodel.adapter.api.config.ConfigurationManager;
 
 /**
- * The class implements this interface can use configuration manager directly.
+ * The class implements this interface can use configuration manager.
  * 
  * @author jianni@hotmail.com
  *

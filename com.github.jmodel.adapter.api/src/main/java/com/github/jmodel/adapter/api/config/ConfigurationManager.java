@@ -1,8 +1,10 @@
 package com.github.jmodel.adapter.api.config;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 /**
  * ConfigurationManager is used to manage configurations. In enterprise
@@ -17,14 +19,32 @@ public final class ConfigurationManager {
 
 	private static ConfigurationManager configurationManager;
 
+	/**
+	 * Configuration loader list can not be empty.
+	 */
+	private final Set<ConfigurationLoader> loaderSet = new HashSet<ConfigurationLoader>();
+
+	/**
+	 * Ordered configuration list managed by ConfigurationManager provides
+	 * configuration override feature.
+	 */
 	private final List<Configuration> configurationList = new ArrayList<Configuration>();
 
 	// construction methods
 
+	/**
+	 * private construction method
+	 */
 	private ConfigurationManager() {
 
 	}
 
+	/**
+	 * This method is invisible from the outside. The outside can implement
+	 * ConfigurationAware to use ConfigurationManager instance.
+	 * 
+	 * @return
+	 */
 	static ConfigurationManager getInstance() {
 		if (configurationManager != null) {
 			return configurationManager;
@@ -36,7 +56,21 @@ public final class ConfigurationManager {
 		}
 	}
 
+	synchronized void addLoader(ConfigurationLoader loader) {
+		if (!loaderSet.contains(loader)) {
+			loaderSet.add(loader);
+		}
+	}
+
 	// public methods
+
+	public boolean hasLoader() {
+		return !loaderSet.isEmpty();
+	}
+
+	public Set<ConfigurationLoader> getLoaders() {
+		return loaderSet;
+	}
 
 	public synchronized void addConfiguration(Configuration configuration) {
 		configurationList.add(configuration);
@@ -53,6 +87,10 @@ public final class ConfigurationManager {
 
 	public Item getItem(String regionId, String... itemIds) {
 
+		if (loaderSet.isEmpty()) {
+			throw new MissingConfigException(ConfigurationLoader.printUsage());
+		}
+
 		Item item = null;
 		ListIterator<Configuration> confIter = configurationList.listIterator(configurationList.size());
 		while (confIter.hasPrevious()) {
@@ -62,7 +100,8 @@ public final class ConfigurationManager {
 			}
 		}
 
-		throw new MissingConfigException("regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds));
+		throw new MissingConfigException(
+				missingConfig("regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds)));
 	}
 
 	public String getItemValue(String regionId, String... itemIds) {
@@ -72,7 +111,8 @@ public final class ConfigurationManager {
 			return item.getValue();
 		}
 
-		throw new MissingConfigException("regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds));
+		throw new MissingConfigException(
+				missingConfig("regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds)));
 	}
 
 	public String getPropertyValue(String propertyName, String regionId, String... itemIds) {
@@ -86,8 +126,8 @@ public final class ConfigurationManager {
 			}
 		}
 
-		throw new MissingConfigException(
-				"regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds) + " property:" + propertyName);
+		throw new MissingConfigException(missingConfig(
+				"regionId:" + regionId + " itemIds:" + String.join(" and ", itemIds) + " property:" + propertyName));
 	}
 
 	// private methods
@@ -124,6 +164,20 @@ public final class ConfigurationManager {
 			}
 		}
 		return null;
+	}
+
+	private final String missingConfig(String msg) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("\t\n====================================\t\n");
+		sb.append("Current valid configuration loaders:\t\n");
+		int i = 1;
+		for (ConfigurationLoader loader : loaderSet) {
+			sb.append(i++).append(". ");
+			sb.append(loader.getClass().getSimpleName()).append("\t\n");
+		}
+		sb.append("====================================\t\n");
+		sb.append(msg);
+		return sb.toString();
 	}
 
 }
