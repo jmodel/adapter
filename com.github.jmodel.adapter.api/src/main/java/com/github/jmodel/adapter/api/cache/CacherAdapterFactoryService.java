@@ -40,7 +40,7 @@ public final class CacherAdapterFactoryService {
 		Iterator<CacherAdapterFactory> cacherAdapterFactorys = loader.iterator();
 		while (cacherAdapter == null && cacherAdapterFactorys.hasNext()) {
 			CacherAdapterFactory cacherAdapterFactory = cacherAdapterFactorys.next();
-			cacherAdapter = cacherAdapterFactory.getAdapter(text);
+			cacherAdapter = cacherAdapterFactory.create(text);
 		}
 		return cacherAdapter;
 	}

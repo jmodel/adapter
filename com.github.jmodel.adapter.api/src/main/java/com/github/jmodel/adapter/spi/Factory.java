@@ -11,11 +11,11 @@ import com.github.jmodel.adapter.api.TermAware;
  * @author jianni@hotmail.com
  *
  */
-public abstract class AdapterFactory<T> extends Initializable implements TermAware {
+public abstract class Factory<T> extends Initializable implements TermAware {
 
 	protected SortedMap<String, T> map;
 
-	public final T getAdapter(String text) {
+	public final T create(String text) {
 
 		if (map == null) {
 			doInit();

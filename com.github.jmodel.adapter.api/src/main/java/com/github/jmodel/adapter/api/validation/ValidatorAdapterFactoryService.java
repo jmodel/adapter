@@ -41,7 +41,7 @@ public final class ValidatorAdapterFactoryService {
 		Iterator<ValidatorAdapterFactory> validatorAdapterFactorys = loader.iterator();
 		while (validatorAdapter == null && validatorAdapterFactorys.hasNext()) {
 			ValidatorAdapterFactory validatorAdapterFactory = validatorAdapterFactorys.next();
-			validatorAdapter = validatorAdapterFactory.getAdapter(text);
+			validatorAdapter = validatorAdapterFactory.create(text);
 		}
 		return validatorAdapter;
 	}

@@ -41,7 +41,7 @@ public final class LoggerAdapterFactoryService {
 		Iterator<LoggerAdapterFactory> loggerAdapterFactorys = loader.iterator();
 		while (loggerAdapter == null && loggerAdapterFactorys.hasNext()) {
 			LoggerAdapterFactory loggerAdapterFactory = loggerAdapterFactorys.next();
-			loggerAdapter = loggerAdapterFactory.getAdapter(text);
+			loggerAdapter = loggerAdapterFactory.create(text);
 		}
 		return loggerAdapter;
 	}

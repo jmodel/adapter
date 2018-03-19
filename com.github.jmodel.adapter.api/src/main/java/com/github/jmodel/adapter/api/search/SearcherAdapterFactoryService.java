@@ -41,7 +41,7 @@ public final class SearcherAdapterFactoryService {
 		Iterator<SearcherAdapterFactory> searcherAdapterFactorys = loader.iterator();
 		while (searcherAdapter == null && searcherAdapterFactorys.hasNext()) {
 			SearcherAdapterFactory searcherAdapterFactory = searcherAdapterFactorys.next();
-			searcherAdapter = searcherAdapterFactory.getAdapter(text);
+			searcherAdapter = searcherAdapterFactory.create(text);
 		}
 		return searcherAdapter;
 	}

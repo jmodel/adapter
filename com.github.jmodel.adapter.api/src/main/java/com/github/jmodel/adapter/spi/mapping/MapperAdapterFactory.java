@@ -4,7 +4,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.github.jmodel.adapter.api.mapping.MapperAdapter;
-import com.github.jmodel.adapter.spi.AdapterFactory;
+import com.github.jmodel.adapter.spi.Factory;
 
 /**
  * Mapper adapter factory interface.
@@ -12,7 +12,7 @@ import com.github.jmodel.adapter.spi.AdapterFactory;
  * @author jianni@hotmail.com
  *
  */
-public abstract class MapperAdapterFactory extends AdapterFactory<MapperAdapter> {
+public abstract class MapperAdapterFactory extends Factory<MapperAdapter> {
 
 	protected final void init() {
 		map = new TreeMap<String, MapperAdapter>();

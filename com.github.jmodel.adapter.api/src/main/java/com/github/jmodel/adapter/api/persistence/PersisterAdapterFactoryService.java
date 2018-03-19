@@ -41,7 +41,7 @@ public final class PersisterAdapterFactoryService {
 		Iterator<PersisterAdapterFactory> persisterAdapterFactorys = loader.iterator();
 		while (persisterAdapter == null && persisterAdapterFactorys.hasNext()) {
 			PersisterAdapterFactory persisterAdapterFactory = persisterAdapterFactorys.next();
-			persisterAdapter = persisterAdapterFactory.getAdapter(text);
+			persisterAdapter = persisterAdapterFactory.create(text);
 		}
 		return persisterAdapter;
 	}

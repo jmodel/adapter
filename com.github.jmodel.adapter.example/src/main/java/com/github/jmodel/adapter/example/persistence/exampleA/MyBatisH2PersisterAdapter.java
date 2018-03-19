@@ -13,7 +13,7 @@ import com.github.jmodel.adapter.example.AdapterExampleTerms;
 import com.github.jmodel.adapter.example.config.ExampleConfigurationLoader;
 import com.github.jmodel.adapter.example.persistence.exampleA.dao.bean.User;
 import com.github.jmodel.adapter.impl.persistence.mybatis.ConnectionFactory;
-import com.github.jmodel.japp.utils.JappUtil;
+import com.github.jmodel.japp.api.Japp;
 
 public class MyBatisH2PersisterAdapter {
 
@@ -47,7 +47,7 @@ public class MyBatisH2PersisterAdapter {
 			user.setName("jianni");
 			user.setCode("JN");
 			Persister persister = Persister.getPersister();
-			Long userId = persister.insertObject(session, JappUtil.getAction(AdapterExampleTerms.INSERT_USER), user);
+			Long userId = persister.insertObject(session, Japp.getAction(AdapterExampleTerms.INSERT_USER), user);
 
 			logger.info(() -> "The new user id is : " + userId);
 			session.commit();

@@ -86,7 +86,7 @@ public final class ConfigurationManager {
 	public <T> ConfiguratorAdapter<T> getAdapter(String text) {
 		if (text == null) {
 			return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance()
-					.getAdapter(AdapterTerms.LFS_CONFIGURATOR);
+					.getAdapter(AdapterTerms.CONFIGURATOR_LFS);
 		} else {
 			return (ConfiguratorAdapter<T>) ConfiguratorAdapterFactoryService.getInstance().getAdapter(text);
 		}

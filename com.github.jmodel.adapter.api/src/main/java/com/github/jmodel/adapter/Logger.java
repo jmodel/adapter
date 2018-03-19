@@ -138,6 +138,18 @@ public final class Logger extends Facade<LoggerAdapter<?>> {
 	}
 
 	/**
+	 * Log a message at the INFO level.
+	 *
+	 * @param category
+	 *            message category
+	 * @param msgSupplier
+	 *            the message supplier to be logged
+	 */
+	public void info(Term category, Supplier<?> msgSupplier) {
+		loggerWrapper.info(category, msgSupplier);
+	}
+
+	/**
 	 * Log a message at the WARN level.
 	 *
 	 * @param msgSupplier

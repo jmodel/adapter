@@ -18,7 +18,7 @@ public final class ConfiguratorAdapterFactoryImpl implements ConfiguratorAdapter
 
 	public ConfiguratorAdapterFactoryImpl() {
 		map = new TreeMap<String, ConfiguratorAdapter<?>>();
-		map.put(AdapterTerms.LFS_CONFIGURATOR, new LocalFSConfiguratorAdapter());
+		map.put(AdapterTerms.CONFIGURATOR_LFS, new LocalFSConfiguratorAdapter());
 	}
 
 	@Override

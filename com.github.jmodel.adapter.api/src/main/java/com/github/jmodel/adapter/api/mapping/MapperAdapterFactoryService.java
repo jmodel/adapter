@@ -42,7 +42,7 @@ public final class MapperAdapterFactoryService {
 		Iterator<MapperAdapterFactory> mapperAdapterFactorys = loader.iterator();
 		while (mapperAdapter == null && mapperAdapterFactorys.hasNext()) {
 			MapperAdapterFactory mapperAdapterFactory = mapperAdapterFactorys.next();
-			mapperAdapter = mapperAdapterFactory.getAdapter(text);
+			mapperAdapter = mapperAdapterFactory.create(text);
 		}
 		return mapperAdapter;
 	}

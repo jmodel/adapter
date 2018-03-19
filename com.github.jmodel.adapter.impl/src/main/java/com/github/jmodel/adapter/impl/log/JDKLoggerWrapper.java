@@ -1,11 +1,17 @@
 package com.github.jmodel.adapter.impl.log;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.api.log.LoggerWrapper;
+import com.github.jmodel.adapter.spi.Term;
 
 import sun.misc.JavaLangAccess;
 import sun.misc.SharedSecrets;
@@ -18,6 +24,8 @@ import sun.misc.SharedSecrets;
  */
 @SuppressWarnings("restriction")
 public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
+
+	private final static Map<String, FileHandler> fileHandlerMap = new HashMap<String, FileHandler>();
 
 	/**
 	 * JDK Logger
@@ -50,7 +58,13 @@ public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 
 	@Override
 	public void info(Supplier<?> msgSupplier) {
+		info(null, msgSupplier);
+	}
+
+	@Override
+	public void info(Term category, Supplier<?> msgSupplier) {
 		if (logger.isLoggable(Level.INFO)) {
+			changeFileHandler(category, logger, Level.INFO);
 			LogRecord logRecord = new LogRecord(Level.INFO, (String) msgSupplier.get());
 			inferCaller(logRecord);
 			logger.log(logRecord);
@@ -105,6 +119,39 @@ public final class JDKLoggerWrapper implements LoggerWrapper<Logger> {
 
 	private boolean isLoggerImplFrame(String cname) {
 		return cname.equals("com.github.jmodel.adapter.Logger");
+	}
+
+	private void changeFileHandler(Term category, Logger logger, Level level) {
+
+		String fileName = "d:\\my.log";
+		if (category != null && category.getText().equals(AdapterTerms.LOGGER_PFM)) {
+			fileName = "d:\\pfm.log";
+		}
+
+		try {
+			FileHandler fileHandler = fileHandlerMap.get(fileName);
+			if (fileHandler != null) {
+
+				for (Handler handler : logger.getHandlers()) {
+					if (handler instanceof FileHandler) {
+						if (handler == fileHandler) {
+							handler.setLevel(level);
+						} else {
+							handler.setLevel(Level.OFF);
+						}
+					}
+				}
+
+			} else {
+				synchronized (fileName) {
+					fileHandler = new FileHandler(fileName);
+					fileHandlerMap.put(fileName, fileHandler);
+					logger.addHandler(fileHandler);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

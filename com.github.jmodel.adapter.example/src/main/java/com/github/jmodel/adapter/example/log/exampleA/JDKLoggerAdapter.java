@@ -1,5 +1,6 @@
 package com.github.jmodel.adapter.example.log.exampleA;
 
+import com.github.jmodel.adapter.AdapterTerms;
 import com.github.jmodel.adapter.Logger;
 import com.github.jmodel.adapter.api.TermAware;
 import com.github.jmodel.adapter.example.config.ExampleConfigurationLoader;
@@ -16,7 +17,7 @@ public class JDKLoggerAdapter implements TermAware {
 
 	public static void main(String[] args) {
 
-		logger.info(() -> "This info msg is printed out by JDK Logger");
+		logger.info(tfs.getTerm(AdapterTerms.LOGGER_PFM), () -> "This info msg is printed out by JDK Logger");
 
 		logger.warn(() -> "This warning msg is printed out by JDK Logger");
 

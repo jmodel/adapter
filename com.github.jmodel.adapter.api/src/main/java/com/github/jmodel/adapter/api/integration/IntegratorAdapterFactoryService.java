@@ -41,7 +41,7 @@ public final class IntegratorAdapterFactoryService {
 		Iterator<IntegratorAdapterFactory> integratorAdapterFactorys = loader.iterator();
 		while (integratorAdapter == null && integratorAdapterFactorys.hasNext()) {
 			IntegratorAdapterFactory integratorAdapterFactory = integratorAdapterFactorys.next();
-			integratorAdapter = integratorAdapterFactory.getAdapter(text);
+			integratorAdapter = integratorAdapterFactory.create(text);
 		}
 		return integratorAdapter;
 	}
