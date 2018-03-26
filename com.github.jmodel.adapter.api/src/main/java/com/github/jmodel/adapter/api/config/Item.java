@@ -24,6 +24,9 @@ public class Item {
 	@XmlAttribute
 	private String value;
 
+	@XmlAttribute
+	private String monitor;
+
 	@XmlElement(name = "item")
 	private List<Item> itemList;
 
@@ -44,6 +47,14 @@ public class Item {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getMonitor() {
+		return monitor;
+	}
+
+	public void setMonitor(String monitor) {
+		this.monitor = monitor;
 	}
 
 	public List<Item> getItemList() {

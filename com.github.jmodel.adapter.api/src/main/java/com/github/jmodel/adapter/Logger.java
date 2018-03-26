@@ -82,7 +82,7 @@ public final class Logger extends Facade<LoggerAdapter<?>> {
 	 * Create a Logger object which uses the logger adapter specified by term to
 	 * write message.
 	 * 
-	 * @param term
+	 * @param adapterTerm
 	 *            A term for the logger adapter
 	 * @param name
 	 *            A name for the logger
